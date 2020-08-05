@@ -121,10 +121,18 @@ public class Task {
 		this.closedDate = closedDate;
 	}
 	
-	/*@OneToMany(fetch=FetchType.EAGER,cascade=CascadeType.ALL)
-	@Column(name="TASK_LOGS")
-	private List<Log> logList = new ArrayList<Log>();;
-*/
+	@OneToMany(fetch=FetchType.EAGER,cascade=CascadeType.ALL)
+	//@Column(name="TASK_LOGS")
+	private List<Log> logList = new ArrayList<Log>();
+
+	public List<Log> getLogList() {
+		return logList;
+	}
+
+	public void setLogList(List<Log> logList) {
+		this.logList = logList;
+	}
+
 	@Override
 	public String toString() {
 		return "Task [taskid=" + taskid + ", name=" + name + ", projectName=" + projectName + ", description="
