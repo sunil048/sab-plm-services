@@ -49,6 +49,7 @@ public class AttachController {
 	                OutputStream out = response.getOutputStream();
 	               /* response.setContentType("image/gif");*/
 	                IOUtils.copy(file.getDocument().getBinaryStream(), out);
+	                
 	                out.flush();
 	                out.close();
 	            }
