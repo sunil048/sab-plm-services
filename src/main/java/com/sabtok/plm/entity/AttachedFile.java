@@ -33,7 +33,17 @@ public class AttachedFile {
 	@Column(name="DOCUMENT")
 	@Lob
 	private Blob document;
+	
+	@Column(name="BINARYDATA")
+	private byte[] binaryData;
+	
+	public byte[] getBinaryData() {
+		return binaryData;
+	}
 
+	public void setBinaryData(byte[] binaryData) {
+		this.binaryData = binaryData;
+	}
 
 	public Integer getDocumentNo() {
 		return documentNo;
@@ -89,4 +99,36 @@ public class AttachedFile {
 	}
 	
 	
+	public class FileData {
+		
+		private String fileName;
+		private String contenetTye;
+		
+		public FileData(String fileName, String contenetTye) {
+			super();
+			this.fileName = fileName;
+			this.contenetTye = contenetTye;
+		}
+
+		public String getFileName() {
+			return fileName;
+		}
+
+		public void setFileName(String fileName) {
+			this.fileName = fileName;
+		}
+
+		public String getContenetTye() {
+			return contenetTye;
+		}
+
+		public void setContenetTye(String contenetTye) {
+			this.contenetTye = contenetTye;
+		}
+		
+		
+		
+		
+		
+	}
 }

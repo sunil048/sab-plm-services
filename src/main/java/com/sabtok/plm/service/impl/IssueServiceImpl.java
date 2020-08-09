@@ -1,0 +1,53 @@
+/**
+ * 
+ */
+package com.sabtok.plm.service.impl;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.sabtok.plm.dao.IssueDao;
+import com.sabtok.plm.entity.Issue;
+import com.sabtok.plm.service.IssueService;
+import com.sabtok.plm.util.IDGenerator;
+
+/**
+ * @author Sunil
+ *
+ * IssueServiceImpl.java Aug 9, 2020 11:05:18 AM
+ */
+@Service
+public class IssueServiceImpl implements IssueService {
+
+	@Autowired
+	private IssueDao issueDao; 
+	
+	@Override
+	public String saveIssue(Issue issue) {
+		String issueID = IDGenerator.getIssueId();
+		issue.setIssueID(issueID);
+		Issue iss = issueDao.save(issue);
+		return iss.getIssueID();
+	}
+
+	/* (non-Javadoc)
+	 * @see com.sabtok.plm.service.IssueService#getIssueList()
+	 */
+	@Override
+	public List<Issue> getIssueList() {
+		return issueDao.findAll();
+	}
+
+	/* (non-Javadoc)
+	 * @see com.sabtok.plm.service.IssueService#getIssue(int)
+	 */
+	@Override
+	public Optional<Issue> getIssue(int rowNo) {
+		return issueDao.findById(rowNo);
+	}
+
+	
+}
