@@ -54,6 +54,7 @@ import com.sabtok.plm.entity.AttachedFile.FileData;
 import com.sabtok.plm.entity.Issue;
 import com.sabtok.plm.mongo.MangoDAO;
 import com.sabtok.plm.service.IssueService;
+import com.sabtok.plm.util.DateUtils;
 import com.sabtok.plm.util.FileUtils;
 import com.sabtok.plm.util.IDGenerator;
 import com.sabtok.plm.util.JsonUtil;
@@ -81,14 +82,20 @@ public class ExceptionController {
 	IssueService issueService;
 	
 	@PostMapping("/save")
-	public ResponseEntity<String> saveException(@RequestParam("DOCUMENT") MultipartFile attachedFile,
+	public ResponseEntity<String> saveException(@RequestParam(value="DOCUMENT",required=false) MultipartFile attachedFile ,
 			@RequestParam("BODY") String issuePayload) throws ParseException, IOException {
 		try {
 		    Issue issue = (Issue) JsonUtil.converStringToObject(issuePayload, Issue.class);
+		    String issueID = IDGenerator.getIssueId();
+			issue.setIssueID(issueID);
+		    if (attachedFile != null) {
+		    	String fileName = issueID+"_"+attachedFile.getOriginalFilename() ;
+		    	byte[] bytedata = attachedFile.getBytes();
+				AttachedFile.FileData fileData =  new AttachedFile().new FileData(fileName,attachedFile.getContentType());
+				fileServices.saveFileToMongo(bytedata, fileData);
+				issue.setFileName(fileName);
+		    }
 		    String issueId = issueService.saveIssue(issue);
-		    byte[] bytedata = attachedFile.getBytes();
-			AttachedFile.FileData fileData =  new AttachedFile().new FileData(issueId+"_"+attachedFile.getOriginalFilename(),attachedFile.getContentType());
-			fileServices.saveFileToMongo(bytedata, fileData);
 			return new ResponseEntity <>(HttpStatus.OK).ok("Issue Created successfully ID ="+issueId);
 			//return "Issue Created successfully ID ="+issueID;
 		}catch (Exception e) {
@@ -96,8 +103,6 @@ public class ExceptionController {
 			return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED).ok(e.getMessage());
 			//return "error";
 		}
-		
-		
 	}
 	
 	@GetMapping("/list")
@@ -111,6 +116,21 @@ public class ExceptionController {
 		return issueService.getIssue(Integer.valueOf(rowNo)).get();
 	}
 	
+	@PostMapping("/updateaction")
+	public boolean updateIssueAction(@RequestBody Map <String,String> updateData) {
+		System.out.println(updateData);
+		issueService.updateIssueActionTaken(updateData.get("ISSUEID"), updateData.get("ACTIONTAKEN_DATA"));
+		return true;
+	}
+	
+	@PostMapping("/close")
+	public boolean closeIssue(@RequestParam("issueID") String issueID) {
+		String closedDate = DateUtils.getDateString();
+		issueService.closeIssue(issueID,closedDate);
+		return true;
+	}
+	
+	//this is mongo db code
 	@GetMapping("/getIssue")
 	public Object getIssueMongo() {
 		mongoDao.setDbName("test");

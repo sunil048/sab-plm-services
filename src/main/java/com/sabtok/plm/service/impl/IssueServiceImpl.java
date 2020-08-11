@@ -8,10 +8,12 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import com.sabtok.plm.dao.IssueDao;
 import com.sabtok.plm.entity.Issue;
 import com.sabtok.plm.service.IssueService;
+import com.sabtok.plm.util.DateUtils;
 import com.sabtok.plm.util.IDGenerator;
 
 /**
@@ -27,11 +29,14 @@ public class IssueServiceImpl implements IssueService {
 	
 	@Override
 	public String saveIssue(Issue issue) {
-		String issueID = IDGenerator.getIssueId();
-		issue.setIssueID(issueID);
+		
+		if (issue.getIssueDate() == null || StringUtils.isEmpty(issue.getIssueDate())) {
+			issue.setIssueDate(DateUtils.getDateString());
+		}
 		Issue iss = issueDao.save(issue);
 		return iss.getIssueID();
 	}
+	
 
 	/* (non-Javadoc)
 	 * @see com.sabtok.plm.service.IssueService#getIssueList()
@@ -47,6 +52,23 @@ public class IssueServiceImpl implements IssueService {
 	@Override
 	public Optional<Issue> getIssue(int rowNo) {
 		return issueDao.findById(rowNo);
+	}
+
+	/* (non-Javadoc)
+	 * @see com.sabtok.plm.service.IssueService#updateIssue(com.sabtok.plm.entity.Issue)
+	 */
+	@Override
+	public int updateIssueActionTaken(String issueID,String actionTaken) {
+		return issueDao.updateIssueActionTaken(actionTaken,issueID);
+	}
+
+
+	/* (non-Javadoc)
+	 * @see com.sabtok.plm.service.IssueService#closeIssue(java.lang.String, java.lang.String)
+	 */
+	@Override
+	public int closeIssue(String issueID, String closedDate) {
+		return issueDao.closeIssue(issueID, closedDate);
 	}
 
 	

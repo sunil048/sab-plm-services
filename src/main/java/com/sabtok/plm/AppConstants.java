@@ -18,26 +18,30 @@ public class AppConstants {
 	public static final String MONGO_PORT="27017";
 	public static final String MONGO_USER="";
 	public static final String MONGO_PASSWORD="";
-	public static final String MONGODB="mongodb://dev:dev@192.168.92.137:27017/test";
-	
-	
-	
+	public static final String MONGODB="mongodb://dev:dev@192.168.92.137:27017/test";	
 	public static String USERMANAGEMENT_URL;
 	public static String USERMANAGEMENT_USERNAME;
 	public static String USERMANAGEMENT_PASSWORD;
+	public static String DATE_FORMATE;
 	
 	@Value("${sabtok.userservice.url}") //Since value can not inject values to static fields directly
 	public void setUrl(String url) {
 		USERMANAGEMENT_URL = url;
 	}
 	
-	@Value("${sabtok.userservice.user}") //Since value can not inject values to static fields directly
+	@Value("${sabtok.userservice.user}")
 	public void setUserName(String uname) {
 		USERMANAGEMENT_USERNAME = uname;
 	}
-	@Value("${sabtok.userservice.password}") //Since value can not inject values to static fields directly
+	
+	@Value("${sabtok.userservice.password}")
 	public void setPassword(String password) {
 		USERMANAGEMENT_URL = password;
+	}
+	
+	@Value("${sabtok.userservice.password}")
+	public void setDateFormate(String dateFormate) {
+		DATE_FORMATE = dateFormate;
 	}
 	
 	/*
