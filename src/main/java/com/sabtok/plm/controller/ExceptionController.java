@@ -96,7 +96,8 @@ public class ExceptionController {
 				issue.setFileName(fileName);
 		    }
 		    String issueId = issueService.saveIssue(issue);
-			return new ResponseEntity <>(HttpStatus.OK).ok("Issue Created successfully ID ="+issueId);
+			//return new ResponseEntity <>(HttpStatus.OK).ok("Issue Created successfully ID ="+issueId);
+			return new ResponseEntity <>(HttpStatus.OK).ok(issueId);
 			//return "Issue Created successfully ID ="+issueID;
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -158,6 +159,11 @@ public class ExceptionController {
 		String data1 = rc.getData(AppConstants.USERMANAGEMENT_URL);
 		System.out.println(data1);
 		return data1;
+	}
+	
+	@PostMapping("/testpost")
+	public ResponseEntity<String> testPost(@RequestBody Map <String,String> requestBody) {
+		return new ResponseEntity <>(HttpStatus.OK).ok("Issue Created successfully ID");
 	}
 	
 	/*

@@ -36,7 +36,7 @@ public class AppConstants {
 	
 	@Value("${sabtok.userservice.password}")
 	public void setPassword(String password) {
-		USERMANAGEMENT_URL = password;
+		USERMANAGEMENT_PASSWORD = password;
 	}
 	
 	@Value("${sabtok.userservice.password}")

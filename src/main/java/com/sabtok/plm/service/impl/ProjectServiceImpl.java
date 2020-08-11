@@ -28,12 +28,7 @@ public class ProjectServiceImpl implements ProjectService {
 	
 	@Override
 	public List<String> getProjectNames() {
-		// TODO Auto-generated method stub
-		List<String> projectName = new ArrayList<String>();
-		projectName.add("PLM");
-		projectName.add("PLM-Dev");
-		projectName.add("sab-edu");
-		return projectName;
+		return projectdao.getProjectNameList();
 	}
 
 }

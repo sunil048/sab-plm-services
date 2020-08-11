@@ -73,13 +73,23 @@ public class AttachController {
 	@GetMapping("/document")
 	public void readAttachement(@RequestParam("docName") String fileName,HttpServletResponse response) throws IOException {
 		  GridFSDBFile file = fileUtils.getGridFsAttachement(fileName);
-		  response.setHeader("Content-Disposition", "inline;filename=\"" + file.getFilename() + "\"");
-          OutputStream out = response.getOutputStream();
-          response.setContentType(file.getContentType());
-          file.writeTo(out);
-         // IOUtils.copy(fs.get("md5"), out);
-          out.flush();
-          out.close();
+		  if (file != null)
+		  {
+			  response.setHeader("Content-Disposition", "inline;filename=\"" + file.getFilename() + "\"");
+	          OutputStream out = response.getOutputStream();
+	          response.setContentType(file.getContentType());
+	          file.writeTo(out);
+	         // IOUtils.copy(fs.get("md5"), out);
+	          out.flush();
+	          out.close();
+		  } else {
+	          OutputStream out = response.getOutputStream();
+	          String error = "File not found !";
+	          out.write(error.getBytes());
+	         // IOUtils.copy(fs.get("md5"), out);
+	          out.flush();
+	          out.close();
+		  }
 	}
 	
 	@GetMapping("/download")

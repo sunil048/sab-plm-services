@@ -179,18 +179,4 @@ public class Issue implements Serializable{
 		public void setClosed(boolean isClosed) {
 			this.isClosed = isClosed;
 		}
-
-		
-		
-		/*
-		 * 
-		 * PayLoad 
-		 * 
-		 * "rowNo":"",
-		 * "issueID":"",
-		 * "issueDate":"",
-		 * "project":""
-		 * 
-		 * 
-		 */
 }
