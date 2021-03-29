@@ -12,7 +12,9 @@ import org.springframework.util.StringUtils;
 
 import com.sabtok.plm.dao.IssueDao;
 import com.sabtok.plm.entity.Issue;
+import com.sabtok.plm.entity.Log;
 import com.sabtok.plm.service.IssueService;
+import com.sabtok.plm.service.LogService;
 import com.sabtok.plm.util.DateUtils;
 import com.sabtok.plm.util.IDGenerator;
 
@@ -26,6 +28,9 @@ public class IssueServiceImpl implements IssueService {
 
 	@Autowired
 	private IssueDao issueDao; 
+	
+	@Autowired
+	private LogService logService;
 	
 	@Override
 	public String saveIssue(Issue issue) {
@@ -68,6 +73,7 @@ public class IssueServiceImpl implements IssueService {
 	 */
 	@Override
 	public int closeIssue(String issueID, String closedDate) {
+		logService.svaeIssueClosedLog(issueID);
 		return issueDao.closeIssue(issueID, closedDate);
 	}
 

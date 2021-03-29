@@ -87,6 +87,15 @@ public class Log {
 	public void setDetails(String details) {
 		this.details = details;
 	}
+	public Log(Integer rowNo, String id, String date, String project, String details, String fileName) {
+		super();
+		this.rowNo = rowNo;
+		this.id = id;
+		this.date = date;
+		this.project = project;
+		this.details = details;
+		this.fileName = fileName;
+	}
 	
 	
 	

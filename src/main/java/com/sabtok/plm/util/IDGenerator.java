@@ -3,6 +3,8 @@
  */
 package com.sabtok.plm.util;
 
+import java.util.UUID;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -38,5 +40,9 @@ public class IDGenerator {
 	    String json = response.getBody();
 	    return prefix.SAB+json;
 
+	}
+	
+	public static UUID getUUID(){
+		return UUID.randomUUID();
 	}
 }

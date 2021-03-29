@@ -21,4 +21,5 @@ public interface LogService {
 	public List<Log> getLogListByProject(String project);
 	public Log saveLog(Log log);
 	public Long nextLogRowno();
+	public boolean svaeIssueClosedLog(String issueId);
 }

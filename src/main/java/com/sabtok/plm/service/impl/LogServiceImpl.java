@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 import com.sabtok.plm.dao.Logdao;
 import com.sabtok.plm.entity.Log;
 import com.sabtok.plm.service.LogService;
+import com.sabtok.plm.util.DateUtils;
+import com.sabtok.plm.util.IDGenerator;
 
 /**
  * @author Sunil
@@ -20,6 +22,8 @@ import com.sabtok.plm.service.LogService;
 @Service
 public class LogServiceImpl implements LogService{
 
+	private final String ISSUE_CLOSED_LOG = "Closed by Issue model";
+	
 	@Autowired
 	private Logdao logDao;
 	
@@ -51,6 +55,20 @@ public class LogServiceImpl implements LogService{
 	@Override
 	public List<Log> getLogListByProject(String project) {
 		return logDao.getLogListByProject(project);
+	}
+
+	/* (non-Javadoc)
+	 * @see com.sabtok.plm.service.LogService#svaeIssueClosedLog(java.lang.String)
+	 */
+	@Override
+	public boolean svaeIssueClosedLog(String issueId) { // issueId ---> project
+		Log log  = new Log(Integer.valueOf(nextLogRowno().toString()), IDGenerator.getUUID().toString(), DateUtils.getDateString(), issueId, ISSUE_CLOSED_LOG,"");
+		try {
+			saveLog(log);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
 	}
 
 }
