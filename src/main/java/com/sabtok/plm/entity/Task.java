@@ -9,6 +9,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -123,6 +124,7 @@ public class Task {
 	
 	@OneToMany(fetch=FetchType.EAGER,cascade=CascadeType.ALL)
 	//@Column(name="TASK_LOGS")
+	//@JoinTable(name="tasks_logs") 
 	private List<Log> logList = new ArrayList<Log>();
 
 	public List<Log> getLogList() {
@@ -135,9 +137,12 @@ public class Task {
 
 	@Override
 	public String toString() {
-		return "Task [taskid=" + taskid + ", name=" + name + ", projectName=" + projectName + ", description="
-				+ description + ", openDate=" + openDate + ", closedDate=" + closedDate + "]";
+		return "Task [taskid=" + taskid + ", name=" + name + ", priority=" + priority + ", status=" + status
+				+ ", wikipedia=" + wikipedia + ", projectName=" + projectName + ", description=" + description
+				+ ", openDate=" + openDate + ", closedDate=" + closedDate + ", logList=" + logList + "]";
 	}
+
+	
 
 	
 }

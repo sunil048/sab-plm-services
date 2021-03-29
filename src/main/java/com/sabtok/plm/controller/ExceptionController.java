@@ -81,6 +81,7 @@ public class ExceptionController {
 	@Autowired
 	IssueService issueService;
 	
+	@SuppressWarnings("unchecked")
 	@PostMapping("/save")
 	public ResponseEntity<String> saveException(@RequestParam(value="DOCUMENT",required=false) MultipartFile attachedFile ,
 			@RequestParam("BODY") String issuePayload) throws ParseException, IOException {
@@ -101,7 +102,7 @@ public class ExceptionController {
 			//return "Issue Created successfully ID ="+issueID;
 		}catch (Exception e) {
 			e.printStackTrace();
-			return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED).ok(e.getMessage());
+			return (ResponseEntity<String>) new ResponseEntity<>(e.getMessage(),HttpStatus.EXPECTATION_FAILED).notFound();
 			//return "error";
 		}
 	}
@@ -164,6 +165,11 @@ public class ExceptionController {
 	@PostMapping("/testpost")
 	public ResponseEntity<String> testPost(@RequestBody Map <String,String> requestBody) {
 		return new ResponseEntity <>(HttpStatus.OK).ok("Issue Created successfully ID");
+	}
+	
+	@GetMapping("/rownumber")
+	public String getRowNumber() {
+		return String.valueOf(issueService.getRowNumber());
 	}
 	
 	/*

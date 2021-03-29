@@ -20,4 +20,5 @@ public interface IssueService {
 	public Optional<Issue> getIssue(int rowNo);
 	public int updateIssueActionTaken(String issueID,String actionTaken);
 	public int closeIssue(String issueID,String closedDate);
+	public Integer getRowNumber();
 }

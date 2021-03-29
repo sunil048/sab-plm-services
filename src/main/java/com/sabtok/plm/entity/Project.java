@@ -23,7 +23,6 @@ import javax.persistence.Table;
 //import org.hibernate.validator.constraints.NotBlank;
 //import org.hibernate.validator.constraints.NotEmpty;
 
-import com.sun.istack.internal.NotNull;
 
 @Entity
 @Table(name="SABPROJECTS")
@@ -41,11 +40,9 @@ public class Project implements Serializable {
     private String stratDate;
 	
 	@Column(name="PREVIOUS_VERSION")
-	@NotNull
 	private Double previousVersion;
 	
     @Column(name="CURRENT_VERSION")
-    @NotNull
     private Double currentVersion;
      
     @Column(name="DESCRIPTION")

@@ -18,5 +18,6 @@ public interface TaskService {
 
 	public List <Task> getAllTasks();
 	public Optional<Task> getTaskDetail(String taskId);
+	public Task saveTask(Task task);
 	
 }

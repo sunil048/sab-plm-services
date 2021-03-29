@@ -22,6 +22,9 @@ public class TaskServiceImpl implements TaskService {
 	@Autowired
 	TaskDao tdao;
 	
+	@Autowired
+	LogService logService;
+	
 	/* (non-Javadoc)
 	 * @see com.sabtok.plm.service.TaskService#getAllTasks()
 	 */
@@ -36,9 +39,20 @@ public class TaskServiceImpl implements TaskService {
 	 */
 	@Override
 	public Optional<Task> getTaskDetail(String taskId) {
-		// TODO Auto-generated method stub
-		return tdao.findById(taskId);
+		Optional<Task> task = tdao.findById(taskId);
+		task.ifPresent(t -> {
+			t.setLogList(logService.getLogListByProject(t.getTaskid()));
+		});
+		return task;
 		//return tdao.findAll();
+	}
+
+	/* (non-Javadoc)
+	 * @see com.sabtok.plm.service.TaskService#saveTask(com.sabtok.plm.entity.Task)
+	 */
+	@Override
+	public Task saveTask(Task task) {
+		return tdao.save(task);
 	}
 
 }

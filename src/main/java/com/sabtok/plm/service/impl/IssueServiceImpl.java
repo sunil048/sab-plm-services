@@ -71,5 +71,14 @@ public class IssueServiceImpl implements IssueService {
 		return issueDao.closeIssue(issueID, closedDate);
 	}
 
+
+	/* (non-Javadoc)
+	 * @see com.sabtok.plm.service.IssueService#getRowNumber()
+	 */
+	@Override
+	public Integer getRowNumber() {
+		return issueDao.getRowNumber();
+	}
+
 	
 }

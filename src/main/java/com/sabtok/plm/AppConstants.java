@@ -18,7 +18,8 @@ public class AppConstants {
 	public static final String MONGO_PORT="27017";
 	public static final String MONGO_USER="";
 	public static final String MONGO_PASSWORD="";
-	public static final String MONGODB="mongodb://dev:dev@192.168.92.137:27017/test";	
+	//public static final String MONGODB="mongodb://dev:dev@192.168.92.137:27017/test";//since field is final no setter method
+	public static String MONGODB;
 	public static String USERMANAGEMENT_URL;
 	public static String USERMANAGEMENT_USERNAME;
 	public static String USERMANAGEMENT_PASSWORD;
@@ -43,6 +44,17 @@ public class AppConstants {
 	public void setDateFormate(String dateFormate) {
 		DATE_FORMATE = dateFormate;
 	}
+
+	public static String getMONGODB() {
+		return MONGODB;
+	}
+
+	@Value("${database.monodburl}")
+	public static void setMONGODB(String mONGODB) {
+		System.out.println("mONGODB "+mONGODB);
+		MONGODB = mONGODB;
+	}
+	
 	
 	/*
 	 * 

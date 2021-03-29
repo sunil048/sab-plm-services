@@ -30,4 +30,7 @@ public interface IssueDao extends JpaRepository<Issue, Integer>{
 	@Query("update Issue set closedDate = :closedDate ,isClosed = true where ISSUEID = :issueID")
 	public int closeIssue(@Param("issueID") String issueID, @Param("closedDate") String closedDate);
 	
+	@Query("select count (*) from Issue")
+	public Integer getRowNumber();
+	
 }

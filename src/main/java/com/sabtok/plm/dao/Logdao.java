@@ -3,9 +3,13 @@
  */
 package com.sabtok.plm.dao;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.sabtok.plm.entity.Log;
 
@@ -19,4 +23,8 @@ public interface Logdao extends JpaRepository<Log, Integer>{
 
 	@Query("select Count(*) from Log")
 	public Long nextLogRowno();
+	
+	
+	@Query("select l from Log l where  l.project= :project")
+	public List<Log> getLogListByProject(@Param("project") String project);
 }

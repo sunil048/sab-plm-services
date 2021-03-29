@@ -18,6 +18,7 @@ import com.sabtok.plm.entity.Log;
 public interface LogService {
 
 	public List<Log> getLogList();
+	public List<Log> getLogListByProject(String project);
 	public Log saveLog(Log log);
 	public Long nextLogRowno();
 }

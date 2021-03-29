@@ -22,7 +22,7 @@ public class Issue implements Serializable{
 
 	
 		@Id
-	    @GeneratedValue(strategy=GenerationType.IDENTITY)
+	   // @GeneratedValue(strategy=GenerationType.IDENTITY)
 	    @Column(name="SLNO")
 		private Integer rowNo;
 	    

@@ -45,4 +45,12 @@ public class LogServiceImpl implements LogService{
 		return totalLogsCount+1;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.sabtok.plm.service.LogService#getLogList(java.lang.String)
+	 */
+	@Override
+	public List<Log> getLogListByProject(String project) {
+		return logDao.getLogListByProject(project);
+	}
+
 }
