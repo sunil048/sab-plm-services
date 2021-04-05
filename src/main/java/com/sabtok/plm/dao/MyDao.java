@@ -39,6 +39,7 @@ public class MyDao {
 	private EntityManager em;
 	
 	private  List<String> taskStatus = new Vector<String>();
+	private  List<String> taskPriorityList = new Vector<String>();
 	
 	public  List<String> getTaskStatus() throws SQLException{
 		/*if (taskStatus.isEmpty()) {
@@ -50,10 +51,12 @@ public class MyDao {
 				taskStatus.add(rs.getString(0));
 			}
 		}*/
-		Query q = em.createNativeQuery("select task_var from plm_var");
-		List data =  q.getResultList();
-		for (Object obj : data) {
-			taskStatus.add(String.valueOf(obj));
+		if (taskStatus.isEmpty()) {
+			Query q = em.createNativeQuery("select task_var from plm_var");
+			List data =  q.getResultList();
+			for (Object obj : data) {
+				taskStatus.add(String.valueOf(obj));
+			}
 		}
 		return taskStatus;
 	}
@@ -68,12 +71,15 @@ public class MyDao {
 				taskStatus.add(rs.getString(0));
 			}
 		}*/
-		Query q = em.createNativeQuery("select task_priority_var from plm_var");
-		List data =  q.getResultList();
-		for (Object obj : data) {
-			taskStatus.add(String.valueOf(obj));
+		if (taskPriorityList.isEmpty()) {
+			Query q = em.createNativeQuery("select task_priority_var from plm_var");
+			List data =  q.getResultList();
+			for (Object obj : data) {
+				taskPriorityList.add(String.valueOf(obj));
+			}
 		}
-		return taskStatus;
+		
+		return taskPriorityList;
 	}
 	
 }

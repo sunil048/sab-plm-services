@@ -40,6 +40,7 @@ public class LogServiceImpl implements LogService{
 	 */
 	@Override
 	public Log saveLog(Log log) {
+		log.setId(IDGenerator.getUUID().toString());
 		return logDao.save(log);
 	}
 
