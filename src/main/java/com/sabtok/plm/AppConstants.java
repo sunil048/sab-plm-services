@@ -19,7 +19,7 @@ public class AppConstants {
 	public static final String MONGO_USER="";
 	public static final String MONGO_PASSWORD="";
 	//public static final String MONGODB="mongodb://dev:dev@192.168.92.137:27017/test";//since field is final no setter method
-	public static String MONGODB;
+	public static String MONGODB = "mongodb://dev:dev@192.168.92.137:27017/test";
 	public static String USERMANAGEMENT_URL;
 	public static String USERMANAGEMENT_USERNAME;
 	public static String USERMANAGEMENT_PASSWORD;
@@ -50,9 +50,9 @@ public class AppConstants {
 	}
 
 	@Value("${database.monodburl}")
-	public static void setMONGODB(String mONGODB) {
-		System.out.println("mONGODB "+mONGODB);
-		MONGODB = mONGODB;
+	public static void setMONGODB(String monodburl) {
+		System.out.println("monodburl "+monodburl);
+		MONGODB = monodburl;
 	}
 	
 	

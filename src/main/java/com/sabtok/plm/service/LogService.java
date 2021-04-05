@@ -22,4 +22,7 @@ public interface LogService {
 	public Log saveLog(Log log);
 	public Long nextLogRowno();
 	public boolean svaeIssueClosedLog(String issueId);
+	public boolean svaeTaskClosedLog(String taskId);
+	public boolean svaeTaskChangesLog(String taskId,String status);
+	public boolean saveTaskPriorityChangesLog(String taskId,String priority);
 }

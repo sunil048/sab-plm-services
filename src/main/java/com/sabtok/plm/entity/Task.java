@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name="TASKS")
@@ -122,9 +123,10 @@ public class Task {
 		this.closedDate = closedDate;
 	}
 	
-	@OneToMany(fetch=FetchType.EAGER,cascade=CascadeType.ALL)
+//	@OneToMany(fetch=FetchType.EAGER,cascade=CascadeType.ALL)
 	//@Column(name="TASK_LOGS")
 	//@JoinTable(name="tasks_logs") 
+	@Transient
 	private List<Log> logList = new ArrayList<Log>();
 
 	public List<Log> getLogList() {

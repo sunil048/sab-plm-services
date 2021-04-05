@@ -18,7 +18,7 @@ import com.sabtok.plm.AppConstants;
  */
 public class IDGenerator {
 
-	enum prefix {
+	public  enum prefix {
 	
 		SAB,
 		CAB

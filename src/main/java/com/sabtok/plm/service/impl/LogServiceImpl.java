@@ -23,6 +23,9 @@ import com.sabtok.plm.util.IDGenerator;
 public class LogServiceImpl implements LogService{
 
 	private final String ISSUE_CLOSED_LOG = "Closed by Issue model";
+	private final String TASK_CLOSED_LOG = "Closed by Task model";
+	private final String TASK_STATUS_CHANGED_LOG = "Status changed to ";
+	private final String TASK_PRIORITY_CHANGED_LOG = "Priority changed to ";
 	
 	@Autowired
 	private Logdao logDao;
@@ -63,6 +66,48 @@ public class LogServiceImpl implements LogService{
 	@Override
 	public boolean svaeIssueClosedLog(String issueId) { // issueId ---> project
 		Log log  = new Log(Integer.valueOf(nextLogRowno().toString()), IDGenerator.getUUID().toString(), DateUtils.getDateString(), issueId, ISSUE_CLOSED_LOG,"");
+		try {
+			saveLog(log);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+	}
+
+	/* (non-Javadoc)
+	 * @see com.sabtok.plm.service.LogService#svaeTaskClosedLog(java.lang.String)
+	 */
+	@Override
+	public boolean svaeTaskClosedLog(String taskId) {
+		Log log  = new Log(Integer.valueOf(nextLogRowno().toString()), IDGenerator.getUUID().toString(), DateUtils.getDateString(), taskId, TASK_CLOSED_LOG,"");
+		try {
+			saveLog(log);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+	}
+
+	/* (non-Javadoc)
+	 * @see com.sabtok.plm.service.LogService#svaeTaskChangesLog(java.lang.String, java.lang.String)
+	 */
+	@Override
+	public boolean svaeTaskChangesLog(String taskId, String status) {
+		Log log  = new Log(Integer.valueOf(nextLogRowno().toString()), IDGenerator.getUUID().toString(), DateUtils.getDateString(), taskId, TASK_STATUS_CHANGED_LOG+status,"");
+		try {
+			saveLog(log);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+	}
+
+	/* (non-Javadoc)
+	 * @see com.sabtok.plm.service.LogService#saveTaskPriorityChangesLog(java.lang.String, java.lang.String)
+	 */
+	@Override
+	public boolean saveTaskPriorityChangesLog(String taskId, String priority) {
+		Log log  = new Log(Integer.valueOf(nextLogRowno().toString()), IDGenerator.getUUID().toString(), DateUtils.getDateString(), taskId, TASK_PRIORITY_CHANGED_LOG+priority,"");
 		try {
 			saveLog(log);
 			return true;

@@ -3,11 +3,14 @@
  */
 package com.sabtok.plm.service;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import com.sabtok.plm.dao.MyDao;
 import com.sabtok.plm.dao.TaskDao;
 import com.sabtok.plm.entity.Task;
 
@@ -24,6 +27,9 @@ public class TaskServiceImpl implements TaskService {
 	
 	@Autowired
 	LogService logService;
+	
+	@Autowired
+	MyDao dao;
 	
 	/* (non-Javadoc)
 	 * @see com.sabtok.plm.service.TaskService#getAllTasks()
@@ -54,5 +60,61 @@ public class TaskServiceImpl implements TaskService {
 	public Task saveTask(Task task) {
 		return tdao.save(task);
 	}
+
+	/* (non-Javadoc)
+	 * @see com.sabtok.plm.service.TaskService#closeTask(java.lang.String, java.lang.String)
+	 */
+	@Override
+	public boolean closeTask(String taskId, String closeDate) {
+		int result = tdao.closeTask(closeDate, taskId);
+		if (result == 1) {
+			logService.svaeTaskClosedLog(taskId);
+			return true;
+		}
+		return false;
+	}
+	
+	@Override
+	public boolean changetaskStatus(String taskId, String status) {
+		int result = tdao.changeTaskStatus(status, taskId);
+		if (result == 1) {
+			logService.svaeTaskChangesLog(taskId, status);
+			return true;
+		}
+		return false;
+	}
+
+	/* (non-Javadoc)
+	 * @see com.sabtok.plm.service.TaskService#changetaskPriority(java.lang.String, java.lang.String)
+	 */
+	@Override
+	public boolean changetaskPriority(String taskId, String priority) {
+		int result = tdao.changeTaskPriority(priority, taskId);
+		if (result == 1) {
+			logService.saveTaskPriorityChangesLog(taskId, priority);
+			return true;
+		}
+		return false;
+	}
+	
+	/* (non-Javadoc)
+	 * @see com.sabtok.plm.service.TaskService#getTaskStatus()
+	 */
+	@Override
+	public List<String> getTaskStatus() throws SQLException {
+		List<String> taskStatus = dao.getTaskStatus();
+		return taskStatus;
+	}
+
+	/* (non-Javadoc)
+	 * @see com.sabtok.plm.service.TaskService#getTaskPriorityList()
+	 */
+	@Override
+	public List<String> getTaskPriorityList() throws SQLException {
+		List<String> taskPriority = dao.getTaskPriorityList();
+		return taskPriority;
+	}
+	
+	
 
 }
