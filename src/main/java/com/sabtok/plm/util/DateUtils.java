@@ -41,6 +41,11 @@ public class DateUtils {
 		return date;
 	}
 	
+	public static String getJav8Date(){
+		LocalDateTime dt = LocalDateTime.now();
+		return dt.toString();
+	}
+	
 	public static void main(String args[]) {
 		DateUtils java8tester = new DateUtils();
 		Calendar cals = Calendar.getInstance();
