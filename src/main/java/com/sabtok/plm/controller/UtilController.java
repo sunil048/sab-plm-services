@@ -89,6 +89,7 @@ public class UtilController {
 		appproperties.put("java.vm.specification.name", environment.getProperty("java.vm.specification.name"));
 		appproperties.put("ARTIFACT", buildProperties.getArtifact());
 		appproperties.put("VSRION", buildProperties.getVersion());
+		appproperties.put("PROJECT_PATH", Thread.currentThread().getContextClassLoader().getResource("").getPath());
 		return appproperties;
 		
 	}
