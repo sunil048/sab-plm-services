@@ -31,5 +31,6 @@ public interface TaskService {
 	 */
 	boolean changetaskStatus(String taskId, String status);
 	boolean changetaskPriority(String taskId, String priority);
+	List <Task> getTaskListByStatus(String status);
 	
 }

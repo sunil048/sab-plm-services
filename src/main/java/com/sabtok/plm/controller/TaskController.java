@@ -14,11 +14,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sabtok.plm.entity.Task;
 import com.sabtok.plm.service.TaskService;
+import com.sabtok.plm.service.TaskServiceImpl;
 import com.sabtok.plm.util.IDGenerator;
 
 /**
@@ -99,6 +102,14 @@ public class TaskController {
 	public List<String> getTaskPriorityList() throws SQLException{
 		List<String> taskPriorityList = service.getTaskPriorityList();
 		return taskPriorityList;
+	}
+	
+	@GetMapping("/closedtasks")
+	public List<Task> getTaskListByStatus(@RequestParam("STATUS") String status){
+		//TaskServiceImpl s = new TaskServiceImpl();//think why object instatatiated here instaed using service object;
+		if (status == null)
+			status = "Closed";
+		return service.getTaskListByStatus(status);
 	}
 	
 }

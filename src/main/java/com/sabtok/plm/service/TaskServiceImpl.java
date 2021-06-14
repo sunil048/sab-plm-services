@@ -6,6 +6,8 @@ package com.sabtok.plm.service;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -115,6 +117,10 @@ public class TaskServiceImpl implements TaskService {
 		return taskPriority;
 	}
 	
-	
+	public List <Task> getTaskListByStatus(String status){
+		List<Task> taskList = tdao.getListByStatus(status);
+	//	taskList = taskList.stream().filter(t -> t.getStatus().equals("Closed")).collect(Collectors.toList());
+		return taskList;
+	}
 
 }

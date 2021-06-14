@@ -44,4 +44,7 @@ public interface TaskDao extends JpaRepository<Task, String> {
 	@Modifying
 	@NamedNativeQuery("Select task_var from plm_var")
 	public List<String> getAllDefinedTaskStatus();*/
+	
+	//Added custom method this is not default method
+	List<Task> getListByStatus(String status);
 }
