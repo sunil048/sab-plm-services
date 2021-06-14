@@ -24,7 +24,17 @@ public class AppConstants {
 	public static String USERMANAGEMENT_USERNAME;
 	public static String USERMANAGEMENT_PASSWORD;
 	public static String DATE_FORMATE;
+	public static String app_environment;
 	
+
+	public static String getApp_environment() {
+		return app_environment;
+	}
+	@Value("${env}")
+	public static void setApp_environment(String app_environment) {
+		AppConstants.app_environment = app_environment;
+	}
+
 	@Value("${sabtok.userservice.url}") //Since value can not inject values to static fields directly
 	public void setUrl(String url) {
 		USERMANAGEMENT_URL = url;
