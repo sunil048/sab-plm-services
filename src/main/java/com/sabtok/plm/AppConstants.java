@@ -3,8 +3,14 @@
  */
 package com.sabtok.plm;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.beans.factory.annotation.Value; 
+
+import java.util.Properties;
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.info.BuildProperties; 
 
 /**
  * @author Sunil
@@ -91,5 +97,15 @@ public class AppConstants {
 	public  enum ResponseStatus {
 		
 		SUCCESS
+	}
+	
+	@ConditionalOnMissingBean
+	@Bean
+	public BuildProperties buildProperties() {
+	    Properties properties = new Properties();
+	    properties.put("group", "com.example");
+	    properties.put("artifact", "sab-plm-services");
+	    properties.put("version", "1");
+	    return new BuildProperties(properties);
 	}
 }
