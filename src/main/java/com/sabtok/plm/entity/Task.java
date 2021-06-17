@@ -9,6 +9,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -33,6 +34,7 @@ public class Task {
 	
 	@Column(name="WIKIPEDIA")
 	private String wikipedia;
+	
 	
 	public String getWikipedia() {
 		return wikipedia;
@@ -135,6 +137,18 @@ public class Task {
 
 	public void setLogList(List<Log> logList) {
 		this.logList = logList;
+	}
+
+	@OneToMany(fetch=FetchType.EAGER,cascade=CascadeType.ALL)
+	@JoinColumn(name="TASK_ID",insertable=false,updatable=false)
+	private List<SubTask> subTasks = new ArrayList();
+	
+	public List<SubTask> getSubTasks() {
+		return subTasks;
+	}
+
+	public void setSubTasks(List<SubTask> subTasks) {
+		this.subTasks = subTasks;
 	}
 
 	@Override

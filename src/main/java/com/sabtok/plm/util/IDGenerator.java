@@ -35,11 +35,14 @@ public class IDGenerator {
 		return Long.valueOf(randomPIN);
 	}
 	
-	public static String getIssueId() {
+	public static String getIssueId1() {
 	    ResponseEntity<String> response = RestConfig.getTemplate().getForEntity(AppConstants.USERMANAGEMENT_URL, String.class);
 	    String json = response.getBody();
 	    return prefix.SAB+json;
 
+	}
+	public static String getIssueId() {
+		return UUID.randomUUID().toString();
 	}
 	
 	public static UUID getUUID(){

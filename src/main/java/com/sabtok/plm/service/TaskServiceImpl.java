@@ -11,9 +11,12 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.util.StringUtils;
 
 import com.sabtok.plm.dao.MyDao;
+import com.sabtok.plm.dao.SubtaskDao;
 import com.sabtok.plm.dao.TaskDao;
+import com.sabtok.plm.entity.SubTask;
 import com.sabtok.plm.entity.Task;
 
 /**
@@ -26,6 +29,9 @@ public class TaskServiceImpl implements TaskService {
 
 	@Autowired
 	TaskDao tdao;
+	
+	@Autowired
+	SubtaskDao stdao;
 	
 	@Autowired
 	LogService logService;
@@ -60,7 +66,11 @@ public class TaskServiceImpl implements TaskService {
 	 */
 	@Override
 	public Task saveTask(Task task) {
-		return tdao.save(task);
+		task = tdao.save(task);
+		if (task != null) {
+			logService.addTaskCreatedLog(task.getTaskid());
+		}
+		return task;
 	}
 
 	/* (non-Javadoc)

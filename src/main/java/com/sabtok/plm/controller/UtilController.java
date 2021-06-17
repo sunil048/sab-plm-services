@@ -70,7 +70,7 @@ public class UtilController {
 		return System.getProperties();
 	}
 	
-	@GetMapping("/app")
+	@GetMapping("/appinfo")
 	public Object getApplicationProperties() {
 		Map<String,Object> appproperties = new LinkedHashMap();
 		appproperties.put("APP_ENVIRONMENT", AppConstants.getApp_environment());

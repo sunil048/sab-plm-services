@@ -22,10 +22,11 @@ import com.sabtok.plm.util.IDGenerator;
 @Service
 public class LogServiceImpl implements LogService{
 
-	private final String ISSUE_CLOSED_LOG = "Closed by Issue model";
-	private final String TASK_CLOSED_LOG = "Closed by Task model";
-	private final String TASK_STATUS_CHANGED_LOG = "Status changed to ";
-	private final String TASK_PRIORITY_CHANGED_LOG = "Priority changed to ";
+	private final String ISSUE_CLOSED_LOG = "Closed by Issue Model";
+	private final String TASK_CLOSED_LOG = "Closed by Task Model";
+	private final String TASK_CREATED_LOG = "CREATED by Task Model";
+	private final String TASK_STATUS_CHANGED_LOG = "Status Changed to ";
+	private final String TASK_PRIORITY_CHANGED_LOG = "Priority Changed to ";
 	
 	@Autowired
 	private Logdao logDao;
@@ -88,6 +89,21 @@ public class LogServiceImpl implements LogService{
 			return false;
 		}
 	}
+	
+	/* (non-Javadoc)
+	 * @see com.sabtok.plm.service.LogService#addTaskCreatedLog(java.lang.String)
+	 */
+	@Override
+	public boolean addTaskCreatedLog(String taskId) {
+		Log log  = new Log(Integer.valueOf(nextLogRowno().toString()), IDGenerator.getUUID().toString(), DateUtils.getDateString(), taskId, TASK_CREATED_LOG,"");
+		try {
+			saveLog(log);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+	}
+
 
 	/* (non-Javadoc)
 	 * @see com.sabtok.plm.service.LogService#svaeTaskChangesLog(java.lang.String, java.lang.String)
@@ -117,4 +133,5 @@ public class LogServiceImpl implements LogService{
 		}
 	}
 
+	
 }

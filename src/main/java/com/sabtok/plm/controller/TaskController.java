@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.sabtok.plm.entity.SubTask;
 import com.sabtok.plm.entity.Task;
 import com.sabtok.plm.service.TaskService;
 import com.sabtok.plm.service.TaskServiceImpl;
@@ -61,8 +62,9 @@ public class TaskController {
 	
 	@GetMapping("/gettaskid")
 	public String generateTaskId() {
-		return IDGenerator.prefix.SAB.toString()+IDGenerator.generateTaskId();
+		return IDGenerator.prefix.SAB.toString()+IDGenerator.generateTaskId().toString();
 	}
+	
 	
 	@PostMapping("/close")
 	public String closeTask(@RequestBody Map<String,String> taskDetails) {
