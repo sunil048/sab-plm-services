@@ -45,6 +45,15 @@ public class IDGenerator {
 		return UUID.randomUUID().toString();
 	}
 	
+	public static Integer getDocumentId() {
+		int randomPIN = (int)(Math.random()*900000)+1000;
+		return Integer.valueOf(randomPIN);
+	}
+	public static Long getLongId() {
+		int randomPIN = (int)(Math.random()*900000)+1000;
+		return Long.valueOf(randomPIN);
+	}
+	
 	public static UUID getUUID(){
 		return UUID.randomUUID();
 	}

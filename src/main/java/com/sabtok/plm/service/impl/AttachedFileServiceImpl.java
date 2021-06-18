@@ -4,6 +4,7 @@ import java.sql.Blob;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import com.sabtok.plm.dao.AttachedFileDAO;
@@ -11,7 +12,7 @@ import com.sabtok.plm.entity.AttachedFile;
 import com.sabtok.plm.entity.Task;
 import com.sabtok.plm.service.AttachedFileService;
 
-@Repository
+@Component
 public class AttachedFileServiceImpl implements AttachedFileService{
 
 	@Autowired
@@ -27,15 +28,11 @@ public class AttachedFileServiceImpl implements AttachedFileService{
 		
 	}
 	
-	/*
 	@Override
-	public void saveAttachement(AttachedFile file) {
-		
-		//String status = attachedFiledao.saveFile(file);
-		
-		
+	public AttachedFile saveAttachement(AttachedFile file) {
+		return attachedFiledao.save(file);
 	}
-
+	/*
 	@Override
 	public Blob getBlob(byte[] content) {
 		return attachedFiledao.getBlob(content);
@@ -47,5 +44,14 @@ public class AttachedFileServiceImpl implements AttachedFileService{
 		return attachedFiledao.getFile(fileName);
 		
 	}*/
+
+	/* (non-Javadoc)
+	 * @see com.sabtok.plm.service.AttachedFileService#downLoadAttachement1(java.lang.String)
+	 */
+	@Override
+	public Optional<AttachedFile> downLoadAttachement1(String parentId,String documentName) {
+		return attachedFiledao.findByParentIdAndDocumentName(parentId,documentName);
+		
+	}
 
 }

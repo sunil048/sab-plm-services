@@ -26,4 +26,5 @@ public interface LogService {
 	public boolean addTaskCreatedLog(String taskId);
 	public boolean svaeTaskChangesLog(String taskId,String status);
 	public boolean saveTaskPriorityChangesLog(String taskId,String priority);
+	public boolean creatLogAction(String itemId,String itemName);//logger for creation
 }

@@ -133,5 +133,17 @@ public class LogServiceImpl implements LogService{
 		}
 	}
 
+	@Override
+	public boolean creatLogAction(String itemId, String itemName) {
+		Log log  = new Log(Integer.valueOf(nextLogRowno().toString()), IDGenerator.getUUID().toString(), DateUtils.getDateString(), itemId, itemName+" created","");
+		try {
+			saveLog(log);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+	}
+
+
 	
 }

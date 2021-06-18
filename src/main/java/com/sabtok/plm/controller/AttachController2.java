@@ -7,7 +7,6 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.sql.Blob;
 import java.sql.SQLException;
 import java.util.Optional;
 
@@ -17,10 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.InputStreamResource;
-import org.springframework.core.io.Resource;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -44,8 +40,8 @@ import com.sabtok.plm.util.FileUtils;
  */
 @CrossOrigin("http://localhost:4200")
 @RestController
-@RequestMapping("/attachement")
-public class AttachController {
+@RequestMapping("/attachement2")
+public class AttachController2 {
 
 	@Autowired(required=true)
 	AttachedFileService fileService;
@@ -76,25 +72,15 @@ public class AttachController {
 	}
 	
 	@GetMapping("/document")
-	public void readAttachement(@RequestParam("docName") String fileName,HttpServletResponse response) throws IOException, SQLException {
-		
-		AttachedFile dbFile;
-		try {
-			Integer docId = Integer.valueOf(fileName);
-			dbFile = fileService.downLoadAttachement(docId).get();
-		} catch (Exception e) {
-			String [] fileVal = fileName.split("_",2);
-			 fileName = fileVal[1];
-			 dbFile = fileService.downLoadAttachement1(fileVal[0],fileName).get();
-		}
-         Blob blob = dbFile.getDocument();
-		  if (dbFile != null)
+	public void readAttachement(@RequestParam("docName") String fileName,HttpServletResponse response) throws IOException {
+		  GridFSDBFile file = fileUtils.getGridFsAttachement(fileName);
+		  if (file != null)
 		  {
-			  response.setHeader("Content-Disposition", "inline;filename=\"" + dbFile.getDocumentName() + "\"");
+			  response.setHeader("Content-Disposition", "inline;filename=\"" + file.getFilename() + "\"");
 	          OutputStream out = response.getOutputStream();
-	          response.setContentType(dbFile.getFileType());
-	         
-	         IOUtils.copy(dbFile.getDocument().getBinaryStream(), out);
+	          response.setContentType(file.getContentType());
+	          file.writeTo(out);
+	         // IOUtils.copy(fs.get("md5"), out);
 	          out.flush();
 	          out.close();
 		  } else {
@@ -106,25 +92,6 @@ public class AttachController {
 	          out.close();
 		  }
 	}
-	
-	//This api downloads doc
-	 @GetMapping("/download/document")
-	    public ResponseEntity<byte[]> downloadFile(@RequestParam("docName") String fileName) throws SQLException {
-	        // Load file from database
-		 String [] fileVal = fileName.split("_");
-		 fileName = fileVal[1];
-		 AttachedFile dbFile = fileService.downLoadAttachement1(fileVal[0],fileName).get();
-         Blob blob = dbFile.getDocument();
-			/*
-			 * return ResponseEntity.ok() .header(HttpHeaders.CONTENT_DISPOSITION,
-			 * "attachment; filename=\"" + dbFile.getDocumentName() + "\"") .body(new
-			 * ByteArrayResource(dbFile.getBinaryData()));
-			 */
-
-	        return ResponseEntity.ok()
-	        		.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + dbFile.getDocumentName() + "\"")
-	                .body(blob.getBytes(1L,(int) blob.length()));
-	    }
 	
 	@GetMapping("/download")
 	public void downloadAttachement(@RequestParam("docName") String fileName,HttpServletResponse response) throws IOException {

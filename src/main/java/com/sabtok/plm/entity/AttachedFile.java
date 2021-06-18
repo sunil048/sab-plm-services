@@ -1,5 +1,6 @@
 package com.sabtok.plm.entity;
 
+import java.io.InputStream;
 import java.sql.Blob;
 
 import javax.persistence.Column;
@@ -9,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name="DOCUMENTS")
@@ -34,9 +36,24 @@ public class AttachedFile {
 	@Lob
 	private Blob document;
 	
+	//@Column(name="STREAM_DATA")
+	@Transient
+	private InputStream documentStreamData;
+	
 	@Column(name="BINARYDATA")
+	@Lob
 	private byte[] binaryData;
 	
+	
+	
+	public InputStream getDocumentStreamData() {
+		return documentStreamData;
+	}
+
+	public void setDocumentStreamData(InputStream documentStreamData) {
+		this.documentStreamData = documentStreamData;
+	}
+
 	public byte[] getBinaryData() {
 		return binaryData;
 	}

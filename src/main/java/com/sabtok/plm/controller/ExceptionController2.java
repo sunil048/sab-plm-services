@@ -8,7 +8,6 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.sql.Blob;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -19,7 +18,6 @@ import java.util.Map;
 import javax.persistence.EntityManager;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
-import javax.sql.rowset.serial.SerialBlob;
 
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.bson.Document;
@@ -55,7 +53,6 @@ import com.sabtok.plm.entity.AttachedFile;
 import com.sabtok.plm.entity.AttachedFile.FileData;
 import com.sabtok.plm.entity.Issue;
 import com.sabtok.plm.mongo.MangoDAO;
-import com.sabtok.plm.service.AttachedFileService;
 import com.sabtok.plm.service.IssueService;
 import com.sabtok.plm.util.DateUtils;
 import com.sabtok.plm.util.FileUtils;
@@ -72,8 +69,8 @@ import javassist.bytecode.analysis.MultiArrayType;
  */
 @CrossOrigin("http://localhost:4200")
 @RestController
-@RequestMapping("issue")
-public class ExceptionController {
+@RequestMapping("issue2")
+public class ExceptionController2 {
 	
 	@Autowired
 	MangoDAO<Document> mongoDao;
@@ -84,9 +81,6 @@ public class ExceptionController {
 	@Autowired
 	IssueService issueService;
 	
-	@Autowired
-	AttachedFileService fileServ;
-	
 	@SuppressWarnings("unchecked")
 	@PostMapping("/save")
 	public ResponseEntity<String> saveException(@RequestParam(value="DOCUMENT",required=false) MultipartFile attachedFile ,
@@ -96,18 +90,11 @@ public class ExceptionController {
 		    String issueID = IDGenerator.getIssueId();
 			issue.setIssueID(issueID);
 		    if (attachedFile != null) {
-		    	//String fileName = issueID+"_"+attachedFile.getOriginalFilename() ;
+		    	String fileName = issueID+"_"+attachedFile.getOriginalFilename() ;
 		    	byte[] bytedata = attachedFile.getBytes();
-		    	AttachedFile file = new AttachedFile();
-				file.setDocumentNo(IDGenerator.getDocumentId());
-				file.setParentId(issue.getIssueID());
-				file.setDocumentName(attachedFile.getOriginalFilename());
-				file.setFileType(attachedFile.getName());
-				file.setUploadedTime(DateUtils.getDateString());
-				Blob myBlob = new SerialBlob(bytedata);
-				file.setDocument(myBlob);;
-				file = fileServ.saveAttachement(file);
-				issue.setFileName(issue.getIssueID()+"_"+attachedFile.getOriginalFilename());//Need to display file name in issue form
+				AttachedFile.FileData fileData =  new AttachedFile().new FileData(fileName,attachedFile.getContentType());
+				fileServices.saveFileToMongo(bytedata, fileData);
+				issue.setFileName(fileName);
 		    }
 		    String issueId = issueService.saveIssue(issue);
 			//return new ResponseEntity <>(HttpStatus.OK).ok("Issue Created successfully ID ="+issueId);
@@ -145,6 +132,20 @@ public class ExceptionController {
 		return true;
 	}
 	
+	//this is mongo db code
+	@GetMapping("/getIssue")
+	public Object getIssueMongo() {
+		mongoDao.setDbName("test");
+		mongoDao.setCollectionName("attachement");
+		BasicDBObject filter = new BasicDBObject();
+		RestCalls rc = new RestCalls("Admin@123","Admin@123");
+		String data1 = rc.getData("http://localhost:8082/generateTaskId");
+		System.out.println(data1);
+		filter.append("DOC_ID", 1234567);
+		List <Document> data = mongoDao.findByQuery(filter);
+		System.out.println(data);
+		return data;
+	}
 	@GetMapping("/resttest")
 	@ResponseBody
 	public String restTest() {
@@ -161,11 +162,103 @@ public class ExceptionController {
 		return data1;
 	}
 	
+	@PostMapping("/testpost")
+	public ResponseEntity<String> testPost(@RequestBody Map <String,String> requestBody) {
+		return new ResponseEntity <>(HttpStatus.OK).ok("Issue Created successfully ID");
+	}
 	
 	@GetMapping("/rownumber")
 	public String getRowNumber() {
 		return String.valueOf(issueService.getRowNumber());
 	}
+	
+	/*
+	 * 
+	 * @PostMapping("/save")
+	public ResponseEntity<Object> saveFileAsGridFS(@RequestParam("DOCID") Long docId,@RequestParam("DOCUMENT") MultipartFile attachedFile,
+			@RequestParam("CREATEDDATE") String createdDate,@RequestParam("FILENAME") String fileName) throws ParseException, IOException {
+		SimpleDateFormat formate = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+		Date date = formate.parse(createdDate);
+		byte[] bytedata = attachedFile.getBytes();
+		
+		try {
+			mongoDao.setDbName("test");
+			mongoDao.setCollectionName("attachement");
+			DB dataBase = mongoDao.getConnection().getDB("test");
+		    GridFS gridFs = new GridFS(dataBase);
+			GridFSInputFile filea = gridFs.createFile(bytedata);
+			filea.setFilename(fileName);
+			filea.setContentType(attachedFile.getContentType());
+			filea.save();
+		//	Document doc = new Document();
+		//	doc.append("DOC_ID", docId);
+		//	doc.append("CREATED_DATE", date);
+		//	doc.append("DOCUMENT", filea);
+		//	String status = mongoDao.insertOne(doc);
+			return	new ResponseEntity<>(HttpStatus.OK).ok("Success");
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.OK).ok(e.getMessage());
+		}
+	}
+	
+	
+		
+	@PostMapping("/savenryhjy")
+	public String saveException2(@RequestBody Map<String,Object> requestBody) throws ParseException, IOException {
+		SimpleDateFormat formate = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+		//Date date = formate.parse((String) requestBody.get("CREATEDDATE"));
+		Object attachedFile = requestBody.get("DOCUMENT");
+		//byte[] bytedata = attachedFile.getBytes();
+		System.out.println(attachedFile);
+		MongoClient mongoClient = new MongoClient("192.168.92.137", 27017);
+		DB database = mongoClient.getDB("test");
+		BasicDBObjectBuilder doc = BasicDBObjectBuilder.start();
+		
+		database.getCollection("attachement").save(doc.get());
+		
+		return "success";
+		
+	}
+	
+	@PostMapping("/save22")
+	public ResponseEntity<Object> saveFileAsGridFS(@RequestParam("DOCID") Long docId,@RequestParam("DOCUMENT") MultipartFile attachedFile,
+			@RequestParam("CREATEDDATE") String createdDate,@RequestParam("FILENAME") String fileName) throws ParseException, IOException {
+		SimpleDateFormat formate = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+		Date date = formate.parse(createdDate);
+		byte[] bytedata = attachedFile.getBytes();
+		Map <String,String> fileData = new HashMap<String,String>();
+		fileData.put("", "");
+		try {
+			fileServices.saveFile(bytedata, fileData, "MONGO");
+			return	new ResponseEntity<>(HttpStatus.OK).ok("Success");
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.OK).ok(e.getMessage());
+		}
+	}
+	
+		@PostMapping("/save11111111111")
+//	public String saveException_old(@RequestParam("DOCUMENT") MultipartFile attachedFile) throws ParseException, IOException {
+	public String saveException_old(@RequestBody Issue issue) throws ParseException, IOException {
+		SimpleDateFormat formate = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+		//Date date = formate.parse(createdDate);
+		Issue is = issue;
+	//	byte[] bytedata = attachedFile.getBytes();
+	//	System.out.println(attachedFile);
+		//System.out.println(date.getDate());
+		MongoClient mongoClient = new MongoClient("192.168.92.137", 27017);
+		DB database = mongoClient.getDB("test");
+		BasicDBObjectBuilder doc = BasicDBObjectBuilder.start();
+		//doc.append("CREATED_DATE", date);
+	//	doc.append("DOCUMENT", bytedata);
+		
+	//	database.getCollection("attachement").save(doc.get());
+		return "success";
+		
+	}
+	 * 
+	 * 
+	 * 
+	 */
 	
 }
 

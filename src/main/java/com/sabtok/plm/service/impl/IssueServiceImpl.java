@@ -39,6 +39,7 @@ public class IssueServiceImpl implements IssueService {
 			issue.setIssueDate(DateUtils.getDateString());
 		}
 		Issue iss = issueDao.save(issue);
+		logService.creatLogAction(iss.getIssueID(), "ISSUE");
 		return String.valueOf(iss.getRowNo());
 	}
 	
