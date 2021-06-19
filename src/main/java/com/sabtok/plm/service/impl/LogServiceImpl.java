@@ -4,6 +4,7 @@
 package com.sabtok.plm.service.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,7 +42,7 @@ public class LogServiceImpl implements LogService{
 	 */
 	@Override
 	public Log saveLog(Log log) {
-		log.setId(IDGenerator.getUUID().toString());
+		//log.setId(IDGenerator.getUUID().toString());
 		return logDao.save(log);
 	}
 
@@ -67,7 +68,7 @@ public class LogServiceImpl implements LogService{
 	 */
 	@Override
 	public boolean svaeIssueClosedLog(String issueId) { // issueId ---> project
-		Log log  = new Log(Integer.valueOf(nextLogRowno().toString()), IDGenerator.getUUID().toString(), DateUtils.getDateString(), issueId, ISSUE_CLOSED_LOG,"");
+		Log log  = new Log(Long.valueOf(nextLogRowno().toString()), IDGenerator.getUUID().toString(), DateUtils.getDateString(), issueId, ISSUE_CLOSED_LOG,"");
 		try {
 			saveLog(log);
 			return true;
@@ -81,7 +82,7 @@ public class LogServiceImpl implements LogService{
 	 */
 	@Override
 	public boolean svaeTaskClosedLog(String taskId) {
-		Log log  = new Log(Integer.valueOf(nextLogRowno().toString()), IDGenerator.getUUID().toString(), DateUtils.getDateString(), taskId, TASK_CLOSED_LOG,"");
+		Log log  = new Log(Long.valueOf(nextLogRowno().toString()), IDGenerator.getUUID().toString(), DateUtils.getDateString(), taskId, TASK_CLOSED_LOG,"");
 		try {
 			saveLog(log);
 			return true;
@@ -95,7 +96,7 @@ public class LogServiceImpl implements LogService{
 	 */
 	@Override
 	public boolean addTaskCreatedLog(String taskId) {
-		Log log  = new Log(Integer.valueOf(nextLogRowno().toString()), IDGenerator.getUUID().toString(), DateUtils.getDateString(), taskId, TASK_CREATED_LOG,"");
+		Log log  = new Log(Long.valueOf(nextLogRowno().toString()), IDGenerator.getUUID().toString(), DateUtils.getDateString(), taskId, TASK_CREATED_LOG,"");
 		try {
 			saveLog(log);
 			return true;
@@ -110,7 +111,7 @@ public class LogServiceImpl implements LogService{
 	 */
 	@Override
 	public boolean svaeTaskChangesLog(String taskId, String status) {
-		Log log  = new Log(Integer.valueOf(nextLogRowno().toString()), IDGenerator.getUUID().toString(), DateUtils.getDateString(), taskId, TASK_STATUS_CHANGED_LOG+status,"");
+		Log log  = new Log(Long.valueOf(nextLogRowno().toString()), IDGenerator.getUUID().toString(), DateUtils.getDateString(), taskId, TASK_STATUS_CHANGED_LOG+status,"");
 		try {
 			saveLog(log);
 			return true;
@@ -124,7 +125,7 @@ public class LogServiceImpl implements LogService{
 	 */
 	@Override
 	public boolean saveTaskPriorityChangesLog(String taskId, String priority) {
-		Log log  = new Log(Integer.valueOf(nextLogRowno().toString()), IDGenerator.getUUID().toString(), DateUtils.getDateString(), taskId, TASK_PRIORITY_CHANGED_LOG+priority,"");
+		Log log  = new Log(Long.valueOf(nextLogRowno().toString()), IDGenerator.getUUID().toString(), DateUtils.getDateString(), taskId, TASK_PRIORITY_CHANGED_LOG+priority,"");
 		try {
 			saveLog(log);
 			return true;
@@ -135,13 +136,23 @@ public class LogServiceImpl implements LogService{
 
 	@Override
 	public boolean creatLogAction(String itemId, String itemName) {
-		Log log  = new Log(Integer.valueOf(nextLogRowno().toString()), IDGenerator.getUUID().toString(), DateUtils.getDateString(), itemId, itemName+" created","");
+		Log log  = new Log(Long.valueOf(nextLogRowno().toString()), IDGenerator.getUUID().toString(), DateUtils.getDateString(), itemId, itemName+" created","");
 		try {
 			saveLog(log);
 			return true;
 		} catch (Exception e) {
 			return false;
 		}
+	}
+
+	@Override
+	public Optional<Log> getLogDetails(Long rowNo) {
+		return logDao.findById(rowNo);
+	}
+
+	@Override
+	public List<Log> getLogListByProject(List<String> projects) {
+		return logDao.getLogListByProjectIn(projects);
 	}
 
 

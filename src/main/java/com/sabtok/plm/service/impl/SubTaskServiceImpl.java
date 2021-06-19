@@ -40,6 +40,14 @@ public class SubTaskServiceImpl implements SubTaskService {
 		// TODO Auto-generated method stub
 		return stDao.getSubTaskListByTaskid(taskId);
 	}
+	@Override
+	public boolean closeTask(String taskId, String closeDate) {
+		int result = stDao.closeSubTask(closeDate, taskId);
+		if (result == 1) {
+			return true;
+		}
+		return false;
+	}
 	
 	
 }

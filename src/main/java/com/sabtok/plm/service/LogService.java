@@ -4,6 +4,7 @@
 package com.sabtok.plm.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -19,7 +20,9 @@ public interface LogService {
 
 	public List<Log> getLogList();
 	public List<Log> getLogListByProject(String project);
+	public List<Log> getLogListByProject(List<String> projects);
 	public Log saveLog(Log log);
+	public Optional<Log> getLogDetails(Long rowNo);
 	public Long nextLogRowno();
 	public boolean svaeIssueClosedLog(String issueId);
 	public boolean svaeTaskClosedLog(String taskId);

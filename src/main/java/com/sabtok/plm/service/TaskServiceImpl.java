@@ -54,8 +54,12 @@ public class TaskServiceImpl implements TaskService {
 	@Override
 	public Optional<Task> getTaskDetail(String taskId) {
 		Optional<Task> task = tdao.findById(taskId);
+		List<String> subTaskIds = task.get().getSubTasks().stream().map(st -> st.getSubTaskId()).collect(Collectors.toList());
+		subTaskIds.add(task.get().getTaskid());
 		task.ifPresent(t -> {
-			t.setLogList(logService.getLogListByProject(t.getTaskid()));
+		//	t.getSubTasks().stream().map(st -> logService.getLogListByProject())
+			//t.setLogList(logService.getLogListByProject(t.getTaskid()));
+			t.setLogList(logService.getLogListByProject(subTaskIds));
 		});
 		return task;
 		//return tdao.findAll();

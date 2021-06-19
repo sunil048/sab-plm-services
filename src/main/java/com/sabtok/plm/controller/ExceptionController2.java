@@ -87,7 +87,7 @@ public class ExceptionController2 {
 			@RequestParam("BODY") String issuePayload) throws ParseException, IOException {
 		try {
 		    Issue issue = (Issue) JsonUtil.converStringToObject(issuePayload, Issue.class);
-		    String issueID = IDGenerator.getIssueId();
+		    String issueID = "SAB"+IDGenerator.getIssueId();
 			issue.setIssueID(issueID);
 		    if (attachedFile != null) {
 		    	String fileName = issueID+"_"+attachedFile.getOriginalFilename() ;

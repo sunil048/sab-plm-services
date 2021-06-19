@@ -20,4 +20,5 @@ import com.sabtok.plm.entity.AttachedFile;
 public interface AttachedFileDAO extends JpaRepository<AttachedFile, Integer> {
 	Optional<AttachedFile> findByDocumentName(String documentName);
 	Optional<AttachedFile> findByParentIdAndDocumentName(String parentId, String documentName);
+	
 }

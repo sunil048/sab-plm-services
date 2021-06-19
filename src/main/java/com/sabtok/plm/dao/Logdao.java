@@ -19,7 +19,7 @@ import com.sabtok.plm.entity.Log;
  * Logdao.java Aug 11, 2020 3:53:01 PM
  */
 @Repository
-public interface Logdao extends JpaRepository<Log, Integer>{
+public interface Logdao extends JpaRepository<Log, Long>{
 
 	@Query("select Count(*) from Log")
 	public Long nextLogRowno();
@@ -27,4 +27,9 @@ public interface Logdao extends JpaRepository<Log, Integer>{
 	
 	@Query("select l from Log l where  l.project= :project")
 	public List<Log> getLogListByProject(@Param("project") String project);
+	
+	public List<Log> getLogListByProjectIn(List<String> projects);
+	
+	
+	
 }

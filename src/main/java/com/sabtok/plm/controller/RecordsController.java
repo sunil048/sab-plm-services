@@ -59,10 +59,9 @@ public class RecordsController {
 		byte[] fileContentByte = uploadedFile.getBytes();
 		Blob myBlob = new SerialBlob(fileContentByte);
 		//System.out.println("fileContentByte "+Arrays.toString(fileContentByte));
-		System.out.println("Inout stream "+ uploadedFile.getInputStream());
 	//	recod.setRecordStremData(new ByteArrayInputStream(uploadedFile.getBytes()));
-		recod.setRecordContenet(uploadedFile.getBytes());
-		recod.setFilebinaryData(Arrays.toString(fileContentByte));
+	//	recod.setRecordContenet(uploadedFile.getBytes());
+		//recod.setFilebinaryData(Arrays.toString(fileContentByte));
 		//recod.setRecordContenet(fileContentByte);
 		recod.setRecordBlobContent(myBlob);
 		recDao.save(recod);
@@ -70,7 +69,7 @@ public class RecordsController {
 	
 	@GetMapping("/download/{RecodId}")
 	public void downloadRecord(@PathVariable("RecodId") Long recodId,HttpServletResponse response) throws IOException, SQLException {
-		Records record = recDao.getOne(recodId);
+		Records record = recDao.findById(recodId).get();
 		 response.setHeader("Content-Disposition", "inline;filename=\"" +record.getRecordName()+ "\"");
          OutputStream out = response.getOutputStream();
         /* response.setContentType("image/gif");
@@ -83,10 +82,10 @@ public class RecordsController {
 		 * (sts.read() != -1) sb.append(sts.read()); }
 		 */
          
-      //   InputStream is = record.getRecordBlobContent().getBinaryStream();
-         InputStream ss = new ByteArrayInputStream(record.getFilebinaryData().getBytes());
+         InputStream is = record.getRecordBlobContent().getBinaryStream();
+       //  InputStream ss = new ByteArrayInputStream(record.getFilebinaryData().getBytes());
        //  InputStream is = record.getRecordStremData();
-         IOUtils.copy(ss, out);
+         IOUtils.copy(is, out);
          out.flush();
          out.close();
          

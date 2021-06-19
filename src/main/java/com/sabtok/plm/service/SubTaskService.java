@@ -17,4 +17,5 @@ public interface SubTaskService {
 
 	public SubTask saveSubTask(SubTask task);
 	List<SubTask> getSubTaskList(String taskId);
+	public boolean closeTask(String taskId,String closeDate);
 }

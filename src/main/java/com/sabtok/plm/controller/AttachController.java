@@ -107,6 +107,7 @@ public class AttachController {
 		  }
 	}
 	
+	
 	//This api downloads doc
 	 @GetMapping("/download/document")
 	    public ResponseEntity<byte[]> downloadFile(@RequestParam("docName") String fileName) throws SQLException {

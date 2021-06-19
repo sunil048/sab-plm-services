@@ -87,13 +87,16 @@ public class ExceptionController {
 	@Autowired
 	AttachedFileService fileServ;
 	
+	@Value("${sabtok.issuidprefix}")
+	private String issuidprefix;
+	
 	@SuppressWarnings("unchecked")
 	@PostMapping("/save")
 	public ResponseEntity<String> saveException(@RequestParam(value="DOCUMENT",required=false) MultipartFile attachedFile ,
 			@RequestParam("BODY") String issuePayload) throws ParseException, IOException {
 		try {
 		    Issue issue = (Issue) JsonUtil.converStringToObject(issuePayload, Issue.class);
-		    String issueID = IDGenerator.getIssueId();
+		    String issueID = issuidprefix+IDGenerator.getIssueId();
 			issue.setIssueID(issueID);
 		    if (attachedFile != null) {
 		    	//String fileName = issueID+"_"+attachedFile.getOriginalFilename() ;
@@ -102,7 +105,7 @@ public class ExceptionController {
 				file.setDocumentNo(IDGenerator.getDocumentId());
 				file.setParentId(issue.getIssueID());
 				file.setDocumentName(attachedFile.getOriginalFilename());
-				file.setFileType(attachedFile.getName());
+				file.setFileType(attachedFile.getContentType());
 				file.setUploadedTime(DateUtils.getDateString());
 				Blob myBlob = new SerialBlob(bytedata);
 				file.setDocument(myBlob);;
@@ -133,7 +136,6 @@ public class ExceptionController {
 	
 	@PostMapping("/updateaction")
 	public boolean updateIssueAction(@RequestBody Map <String,String> updateData) {
-		System.out.println(updateData);
 		issueService.updateIssueActionTaken(updateData.get("ISSUEID"), updateData.get("ACTIONTAKEN_DATA"));
 		return true;
 	}

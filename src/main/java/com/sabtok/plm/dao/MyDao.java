@@ -40,6 +40,7 @@ public class MyDao {
 	
 	private  List<String> taskStatus = new Vector<String>();
 	private  List<String> taskPriorityList = new Vector<String>();
+	private  List<String> projectNameList = new Vector<String>();
 	
 	public  List<String> getTaskStatus() throws SQLException{
 		/*if (taskStatus.isEmpty()) {
@@ -80,6 +81,18 @@ public class MyDao {
 		}
 		
 		return taskPriorityList;
+	}
+	
+	public  List<String> getProjectNameList() throws SQLException{
+		if (projectNameList.isEmpty()) {
+			Query q = em.createNativeQuery("select project_names from plm_var");
+			List<String> data =  q.getResultList();
+			for (Object obj : data) {
+				projectNameList.add(String.valueOf(obj));
+			}
+		}
+		
+		return projectNameList;
 	}
 	
 }

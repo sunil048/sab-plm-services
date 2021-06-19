@@ -1,0 +1,4 @@
+[{"refno":1, "task_var":"Open", "task_priority_var":"Low", "issue_priority_var":"Low", "issue_type_var":"Defect", "project_names":"DEV-sab-plm-service"},
+ {"refno":2, "task_var":"Progress", "task_priority_var":"Medium", "issue_priority_var":"Medium", "issue_type_var":"CR", "project_names":"DEV-sab-plm-service"},
+ {"refno":3, "task_var":"Hold", "task_priority_var":"High", "issue_priority_var":"High", "issue_type_var":"Others", "project_names":"DEV-sab-plm-service"},
+ {"refno":4, "task_var":"Closed", "task_priority_var":"", "issue_priority_var":"", "issue_type_var":"Dev-Defect", "project_names":"DEV-sab-plm-service"}]

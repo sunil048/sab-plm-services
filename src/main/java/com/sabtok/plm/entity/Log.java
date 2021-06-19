@@ -1,5 +1,6 @@
 package com.sabtok.plm.entity;
 
+import java.io.Serializable;
 import java.sql.Blob;
 
 import javax.persistence.Column;
@@ -12,7 +13,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="LOGS")
-public class Log {
+public class Log implements Serializable {
 
 	public Log() {
 		super();
@@ -20,7 +21,7 @@ public class Log {
 	}
 	@Id
 	@Column(name="SLNO")
-	private Integer rowNo;
+	private Long rowNo;
 	
 	@Column(name="ID")
 	private String id;
@@ -49,10 +50,10 @@ public class Log {
 		return "Log [rowNo=" + rowNo + ", id=" + id + ", date=" + date + ", project=" + project + ", details=" + details
 				+ "]";
 	}
-	public Integer getRowNo() {
+	public Long getRowNo() {
 		return rowNo;
 	}
-	public void setRowNo(Integer rowNo) {
+	public void setRowNo(Long rowNo) {
 		this.rowNo = rowNo;
 	}
 	
@@ -87,7 +88,7 @@ public class Log {
 	public void setDetails(String details) {
 		this.details = details;
 	}
-	public Log(Integer rowNo, String id, String date, String project, String details, String fileName) {
+	public Log(Long rowNo, String id, String date, String project, String details, String fileName) {
 		super();
 		this.rowNo = rowNo;
 		this.id = id;

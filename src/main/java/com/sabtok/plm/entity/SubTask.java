@@ -22,7 +22,6 @@ import org.hibernate.annotations.ManyToAny;
  */
 @Entity
 @Table(name="SUB_TASKS")
-
 public class SubTask implements Serializable {
 	
 	/**
