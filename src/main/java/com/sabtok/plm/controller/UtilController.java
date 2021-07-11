@@ -3,6 +3,9 @@
  */
 package com.sabtok.plm.controller;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.sql.DatabaseMetaData;
 import java.sql.SQLException;
 import java.util.Date;
@@ -71,7 +74,7 @@ public class UtilController {
 	}
 	
 	@GetMapping("/appinfo")
-	public Object getApplicationProperties() {
+	public Object getApplicationProperties() throws IOException, InterruptedException {
 		Map<String,Object> appproperties = new LinkedHashMap();
 		appproperties.put("APP_ENVIRONMENT", AppConstants.getApp_environment());
 		appproperties.put("OS", System.getProperty("os.name"));
@@ -90,6 +93,7 @@ public class UtilController {
 		appproperties.put("ARTIFACT", buildProperties.getArtifact());
 		appproperties.put("VSRION", buildProperties.getVersion());
 		appproperties.put("PROJECT_PATH", Thread.currentThread().getContextClassLoader().getResource("").getPath());
+		appproperties.put("BRANCH", getCurrentGitBranch());
 		return appproperties;
 		
 	}
@@ -118,6 +122,16 @@ public class UtilController {
 			e.printStackTrace();
 			return "Error in reading data base properties";
 		}
+	}
+	
+	private String getCurrentGitBranch() throws IOException, InterruptedException {
+	    Process process = Runtime.getRuntime().exec( "git rev-parse --abbrev-ref HEAD");
+	    process.waitFor();
+
+	    BufferedReader reader = new BufferedReader(
+	            new InputStreamReader( process.getInputStream() ) );
+
+	    return reader.readLine();
 	}
 	
 }
