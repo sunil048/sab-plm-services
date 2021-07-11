@@ -87,5 +87,17 @@ public class IssueServiceImpl implements IssueService {
 		return issueDao.getRowNumber();
 	}
 
+
+	@Override
+	public Integer getClosedIssuesCount() {
+		return issueDao.getClosedIssuesCount();
+	}
+
+
+	@Override
+	public Integer getOpenIssuesCount() {
+		return issueDao.getOpenIssuesCount();
+	}
+
 	
 }

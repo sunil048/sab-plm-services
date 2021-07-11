@@ -4,6 +4,7 @@
 package com.sabtok.plm.controller;
 
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -114,4 +115,15 @@ public class TaskController {
 		return service.getTaskListByStatus(status);
 	}
 	
+	@GetMapping("/dashboard")
+	public Object taskDashBoardDetails() {
+		Map <String, Number> taskDashBoardDetails = new HashMap();
+		taskDashBoardDetails.put("TOTAL_TASKS", service.getTotalTaskCount());
+		taskDashBoardDetails.put("OPEN_TASKS", service.getOpenTaskCount());
+		taskDashBoardDetails.put("PROGRESS_TASKS", service.getInprogressTaskCount());
+		taskDashBoardDetails.put("HOLD_TASKS", service.getHoldTaskCount());
+		taskDashBoardDetails.put("CLOSED_TASKS", service.getClosedTaskCount());
+		taskDashBoardDetails.put("CREATED_TASKS", service.getNoStatusTaskCount());
+		return taskDashBoardDetails;
+	}
 }

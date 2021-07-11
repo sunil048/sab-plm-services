@@ -21,4 +21,6 @@ public interface IssueService {
 	public int updateIssueActionTaken(String issueID,String actionTaken);
 	public int closeIssue(String issueID,String closedDate);
 	public Integer getRowNumber();
+	public Integer getClosedIssuesCount();
+	public Integer getOpenIssuesCount();
 }

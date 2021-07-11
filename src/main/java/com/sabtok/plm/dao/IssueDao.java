@@ -33,4 +33,10 @@ public interface IssueDao extends JpaRepository<Issue, Integer>{
 	@Query("select count (*) from Issue")
 	public Integer getRowNumber();
 	
+	@Query("select count (*) from Issue where issue_status=1")
+	public Integer getClosedIssuesCount();
+	
+	@Query("select count (*) from Issue where issue_status=0")
+	public Integer getOpenIssuesCount();
+	
 }

@@ -137,4 +137,34 @@ public class TaskServiceImpl implements TaskService {
 		return taskList;
 	}
 
+	@Override
+	public Integer getOpenTaskCount() {
+		return tdao.getOpenTaskCount();
+	}
+
+	@Override
+	public Integer getClosedTaskCount() {
+		return tdao.getCloedTaskCount();
+	}
+
+	@Override
+	public Long getTotalTaskCount() {
+		return tdao.count();
+	}
+
+	@Override
+	public Integer getInprogressTaskCount() {
+		return tdao.getInprogressTaskCount();
+	}
+
+	@Override
+	public Integer getHoldTaskCount() {
+		return tdao.getHoldTaskCount();
+	}
+
+	@Override
+	public Integer getNoStatusTaskCount() {
+		return tdao.getNoStatusTaskCount();
+	}
+
 }

@@ -6,7 +6,9 @@ package com.sabtok.plm.controller;
 import java.io.IOException;
 import java.sql.Blob;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.sql.rowset.serial.SerialBlob;
 import javax.sql.rowset.serial.SerialException;
@@ -98,5 +100,12 @@ public class LogController {
 	@GetMapping("/logdetails/{rowno}")
 	public Log getLog(@PathVariable("rowno") Long rowNo) {
 		return logService.getLogDetails(rowNo).get();
+	}
+	
+	@GetMapping("/dashboard")
+	public Object dashBoardDeatials() {
+		Map<String,Long> logDashBoardDetails = new HashMap();
+		logDashBoardDetails.put("TOTAL_LOGS", logService.nextLogRowno());
+		return logDashBoardDetails;
 	}
 }

@@ -163,10 +163,19 @@ public class ExceptionController {
 		return data1;
 	}
 	
-	
+	//Add+1 client side to add next entry
 	@GetMapping("/rownumber")
 	public String getRowNumber() {
 		return String.valueOf(issueService.getRowNumber());
+	}
+	
+	@GetMapping("/dashboard")
+	public Object getIssueDashBoardDetails() {
+		Map <String,Integer> dashBoardDetails = new HashMap<String,Integer>();
+		dashBoardDetails.put("TOTLA_ISSUES", issueService.getRowNumber());
+		dashBoardDetails.put("OPEN_ISSUES", issueService.getOpenIssuesCount());
+		dashBoardDetails.put("CLOSED_ISSUES", issueService.getClosedIssuesCount());
+		return dashBoardDetails;
 	}
 	
 }

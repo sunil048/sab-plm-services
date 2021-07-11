@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.jpa.repository.Query;
+
 import com.sabtok.plm.entity.Task;
 
 
@@ -32,5 +34,11 @@ public interface TaskService {
 	boolean changetaskStatus(String taskId, String status);
 	boolean changetaskPriority(String taskId, String priority);
 	List <Task> getTaskListByStatus(String status);
+	public Long getTotalTaskCount();
+	public Integer getOpenTaskCount();
+	public Integer getClosedTaskCount();
+	public Integer getInprogressTaskCount();
+	public Integer getHoldTaskCount();
+	public Integer getNoStatusTaskCount();
 	
 }
