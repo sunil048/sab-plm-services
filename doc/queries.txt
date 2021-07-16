@@ -6,6 +6,3 @@ CREATE TABLE `plm_var` (
   `issue_type_var` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`refno`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-SELECT * FROM plm.logs;
-
-insert into Log(
