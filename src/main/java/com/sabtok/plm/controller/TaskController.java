@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,7 +32,8 @@ import com.sabtok.plm.util.IDGenerator;
  *
  * TaskController.java Aug 2, 2020 10:22:41 AM
  */
-@CrossOrigin("http://localhost:4200")
+//@CrossOrigin(@Value("${cross-origin-port}"))
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/task")
 public class TaskController {
