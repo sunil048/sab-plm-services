@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sabtok.plm.dao.ProjectDao;
+import com.sabtok.plm.entity.Project;
 import com.sabtok.plm.service.ProjectService;
 
 /**
@@ -29,6 +30,16 @@ public class ProjectServiceImpl implements ProjectService {
 	@Override
 	public List<String> getProjectNames() {
 		return projectdao.getProjectNameList();
+	}
+
+	@Override
+	public Project getProjectdetails(String projectId) {
+		return projectdao.findById(projectId).get();
+	}
+
+	@Override
+	public List<Project> getProjectList() {
+		return projectdao.findAll();
 	}
 
 }
