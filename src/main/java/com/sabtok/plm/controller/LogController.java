@@ -37,7 +37,7 @@ import com.sabtok.plm.util.IDGenerator;
  *
  * LogController.java Aug 11, 2020 3:47:53 PM
  */
-@CrossOrigin("http://localhost:4200")
+@CrossOrigin("http://localhost:500")
 @RestController
 @RequestMapping("/log")
 public class LogController {

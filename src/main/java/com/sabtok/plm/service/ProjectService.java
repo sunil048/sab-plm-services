@@ -7,6 +7,8 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.sabtok.plm.entity.Project;
+
 /**
  * @author Sunil
  *
@@ -16,4 +18,6 @@ import org.springframework.stereotype.Service;
 public interface ProjectService {
 
 	public List<String> getProjectNames();
+	public Project  getProjectdetails(String projectId);
+	public List<Project> getProjectList();
 }
