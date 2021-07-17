@@ -33,5 +33,9 @@ public class EffortServiceImpl implements EffortService{
 	public Long getTotalEffortForTask(String taskID) {
 		return effortsDao.getTotalEffortForTaskID(taskID);
 	}
+	@Override
+	public Long getTotalEffort() {
+		return effortsDao.getTotalEffort();
+	}
 
 }

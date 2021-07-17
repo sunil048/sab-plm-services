@@ -35,5 +35,9 @@ public class EffortController {
 	public String getTotalEffortForTask(@PathVariable("taskID") String taskID) {
 		return String.valueOf(effortServ.getTotalEffortForTask(taskID));
 	}
+	@GetMapping("/totaleffort")
+	public String getTotalEffort() {
+		return String.valueOf(effortServ.getTotalEffort());
+	}
 	
 }

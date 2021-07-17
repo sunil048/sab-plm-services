@@ -12,4 +12,5 @@ public interface EffortService {
 	public String logEfforts(String taskId, String taskType,int hours,String comment);
 	public List<Efforts> getEffortsList();
 	public Long getTotalEffortForTask(String taskID);
+	public Long getTotalEffort();
 }

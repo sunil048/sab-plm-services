@@ -13,4 +13,7 @@ public interface EffortsDao extends JpaRepository<Efforts, Long> {
 	
 	@Query(value = "SELECT SUM(hours) FROM EFFORTS where task_id=:taskID", nativeQuery = true)
 	public Long getTotalEffortForTaskID(@Param("taskID") String taskID);
+	
+	@Query(value = "SELECT SUM(hours) FROM EFFORTS", nativeQuery = true)
+	public Long getTotalEffort();
 }
