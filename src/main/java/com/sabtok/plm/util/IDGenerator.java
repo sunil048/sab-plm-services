@@ -50,6 +50,12 @@ public class IDGenerator {
 		int randomPIN = (int)(Math.random()*900000)+1000;
 		return Integer.valueOf(randomPIN);
 	}
+	
+	public static Integer getReleaseId() {
+		int randomPIN = (int)(Math.random()*900000)+1000;
+		return Integer.valueOf(randomPIN);
+	}
+	
 	public static Long getLongId() {
 		int randomPIN = (int)(Math.random()*900000)+1000;
 		return Long.valueOf(randomPIN);
