@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.sabtok.plm.entity.Efforts;
 import com.sabtok.plm.service.EffortService;
 
-@CrossOrigin("*")
+//@CrossOrigin("*")
 @RestController
 @RequestMapping("/efforts")
 public class EffortController {

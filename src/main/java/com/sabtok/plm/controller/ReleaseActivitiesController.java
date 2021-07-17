@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.sabtok.plm.entity.Release;
 import com.sabtok.plm.service.ReleaseActivities;
 
-@CrossOrigin("*")
+
 @Controller
 public class ReleaseActivitiesController {
 

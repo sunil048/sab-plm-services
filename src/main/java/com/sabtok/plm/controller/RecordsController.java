@@ -41,7 +41,7 @@ import com.sabtok.plm.util.IDGenerator;
  *
  * RecordsController.java Jun 17, 2021 9:09:45 PM
  */
-@CrossOrigin("*")
+
 @RestController()
 @RequestMapping("/records")
 public class RecordsController {

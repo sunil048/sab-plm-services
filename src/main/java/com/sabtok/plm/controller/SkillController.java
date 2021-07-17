@@ -19,7 +19,7 @@ import com.sabtok.plm.service.SkillService;
  *
  * SkillController.java Aug 9, 2020 6:38:11 PM
  */
-@CrossOrigin("http://localhost:5000")
+
 @RestController
 @RequestMapping("/skill")
 public class SkillController {

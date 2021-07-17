@@ -42,7 +42,7 @@ import com.sabtok.plm.util.FileUtils;
  *
  * AttachController.java Aug 5, 2020 4:19:04 PM
  */
-@CrossOrigin("http://localhost:500")
+
 @RestController
 @RequestMapping("/attachement")
 public class AttachController {

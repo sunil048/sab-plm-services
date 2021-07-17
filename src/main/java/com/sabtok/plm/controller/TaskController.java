@@ -33,7 +33,7 @@ import com.sabtok.plm.util.IDGenerator;
  * TaskController.java Aug 2, 2020 10:22:41 AM
  */
 //@CrossOrigin(@Value("${cross-origin-port}"))
-@CrossOrigin("*")
+//@CrossOrigin("*")
 @RestController
 @RequestMapping("/task")
 public class TaskController {

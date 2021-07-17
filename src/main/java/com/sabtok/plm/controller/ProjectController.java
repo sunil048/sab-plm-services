@@ -24,7 +24,7 @@ import com.sabtok.plm.service.ProjectService;
  *
  * ProjectController.java Aug 9, 2020 5:28:16 PM
  */
-@CrossOrigin("http://localhost:5000")
+
 @RestController
 @RequestMapping("/project")
 public class ProjectController {

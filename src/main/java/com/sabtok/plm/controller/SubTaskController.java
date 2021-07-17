@@ -26,7 +26,7 @@ import com.sabtok.plm.util.IDGenerator;
  *
  * SubTaskController.java Jun 16, 2021 3:50:14 PM
  */
-@CrossOrigin("*")
+
 @RestController
 @RequestMapping("/subtask")
 public class SubTaskController {
