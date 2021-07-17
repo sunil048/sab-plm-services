@@ -51,6 +51,17 @@ public class Skill implements Serializable{
 //	@NotBlank(message="Please select category.")
 	@Column(name="CATEGORY")
 	private String category;
+	
+	transient Long totalEffort;
+	
+	public Long getTotalEffort() {
+		return totalEffort;
+	}
+
+	public void setTotalEffort(Long totalEffort) {
+		this.totalEffort = totalEffort;
+	}
+
 	public Skill() {
 		super();
 		// TODO Auto-generated constructor stub

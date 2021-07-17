@@ -14,6 +14,7 @@ import javax.sql.rowset.serial.SerialBlob;
 import javax.sql.rowset.serial.SerialException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -37,7 +38,8 @@ import com.sabtok.plm.util.IDGenerator;
  *
  * LogController.java Aug 11, 2020 3:47:53 PM
  */
-@CrossOrigin("http://localhost:500")
+
+
 @RestController
 @RequestMapping("/log")
 public class LogController {

@@ -70,7 +70,7 @@ import javassist.bytecode.analysis.MultiArrayType;
  *
  * ExceptionController.java Aug 5, 2020 7:30:23 PM
  */
-@CrossOrigin("http://localhost:5000")
+//@CrossOrigin("http://localhost:5000")
 @RestController
 @RequestMapping("issue")
 public class ExceptionController {

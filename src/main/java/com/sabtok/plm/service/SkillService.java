@@ -5,6 +5,8 @@ package com.sabtok.plm.service;
 
 import java.util.List;
 
+import com.sabtok.plm.entity.Skill;
+
 /**
  * @author Sunil
  *
@@ -14,4 +16,5 @@ import java.util.List;
 public interface SkillService {
 
 	public List<String> getSkillNames();
+	public List<Skill> getSkillList();
 }
