@@ -61,6 +61,16 @@ public class IDGenerator {
 		return Long.valueOf(randomPIN);
 	}
 	
+	public static Long getProjectId() {
+		int randomPIN = (int)(Math.random()*900000)+1000;
+		return Long.valueOf(randomPIN);
+	}
+	
+	public static Long getSkillId() {
+		int randomPIN = (int)(Math.random()*900000)+1000;
+		return Long.valueOf(randomPIN);
+	}
+	
 	public static UUID getUUID(){
 		return UUID.randomUUID();
 	}

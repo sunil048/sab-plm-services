@@ -28,6 +28,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fasterxml.jackson.databind.annotation.JsonAppend.Prop;
 import com.sabtok.plm.AppConstants;
 import com.sabtok.plm.util.DateUtils;
+import com.sabtok.plm.util.IDGenerator;
 
 /**
  * @author Sunil
@@ -122,6 +123,16 @@ public class UtilController {
 			e.printStackTrace();
 			return "Error in reading data base properties";
 		}
+	}
+	
+	@GetMapping("/generate-project-id")
+	public String getProjectId() {
+		return String.valueOf(IDGenerator.getProjectId());
+	}
+	
+	@GetMapping("/skill-id")
+	public String getSkillId() {
+		return String.valueOf(IDGenerator.getSkillId());
 	}
 	
 	private String getCurrentGitBranch() throws IOException, InterruptedException {
