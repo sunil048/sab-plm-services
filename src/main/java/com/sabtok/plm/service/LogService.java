@@ -30,4 +30,7 @@ public interface LogService {
 	public boolean svaeTaskChangesLog(String taskId,String status);
 	public boolean saveTaskPriorityChangesLog(String taskId,String priority);
 	public boolean creatLogAction(String itemId,String itemName);//logger for creation
+	
+	public Long getTotalEffortForTask(String taskID);
+	public Long getTotalEffort();
 }

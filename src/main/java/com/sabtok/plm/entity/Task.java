@@ -26,6 +26,9 @@ public class Task {
 	@Column(name="TASK_NAME")
 	private String name;
 	
+	@Column(name="TASK_TYPE")
+	private String taskType;
+	
 	@Column(name="PRIORITY")
 	private String priority;
 	
@@ -35,7 +38,14 @@ public class Task {
 	@Column(name="WIKIPEDIA")
 	private String wikipedia;
 	
-	
+	public String getTaskType() {
+		return taskType;
+	}
+
+	public void setTaskType(String taskType) {
+		this.taskType = taskType;
+	}
+
 	public String getWikipedia() {
 		return wikipedia;
 	}
@@ -153,7 +163,7 @@ public class Task {
 
 	@Override
 	public String toString() {
-		return "Task [taskid=" + taskid + ", name=" + name + ", priority=" + priority + ", status=" + status
+		return "Task [taskid=" + taskid + ", name=" + name + ",taskType="+ taskType +", priority=" + priority + ", status=" + status
 				+ ", wikipedia=" + wikipedia + ", projectName=" + projectName + ", description=" + description
 				+ ", openDate=" + openDate + ", closedDate=" + closedDate + ", logList=" + logList + "]";
 	}

@@ -19,6 +19,7 @@ import com.sabtok.plm.entity.Task;
  */
 public interface TaskService {
 
+	public List<String> getTaskTypesFromPLM_WAR();
 	public List <Task> getAllTasks();
 	public Optional<Task> getTaskDetail(String taskId);
 	public Task saveTask(Task task);

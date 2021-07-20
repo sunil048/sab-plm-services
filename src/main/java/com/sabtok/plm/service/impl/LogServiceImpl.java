@@ -155,6 +155,16 @@ public class LogServiceImpl implements LogService{
 		return logDao.getLogListByProjectIn(projects);
 	}
 
+	@Override
+	public Long getTotalEffortForTask(String taskID) {
+		return logDao.getTotalEffortForTaskID(taskID);
+	}
+
+	@Override
+	public Long getTotalEffort() {
+		return logDao.getTotalEffort();
+	}
+
 
 	
 }

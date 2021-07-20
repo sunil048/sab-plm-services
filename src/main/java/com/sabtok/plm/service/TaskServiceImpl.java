@@ -4,6 +4,7 @@
 package com.sabtok.plm.service;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collector;
@@ -165,6 +166,17 @@ public class TaskServiceImpl implements TaskService {
 	@Override
 	public Integer getNoStatusTaskCount() {
 		return tdao.getNoStatusTaskCount();
+	}
+
+	@Override
+	public List<String> getTaskTypesFromPLM_WAR() {
+		try {
+			return dao.getTaskTypes();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return new ArrayList();
 	}
 
 }

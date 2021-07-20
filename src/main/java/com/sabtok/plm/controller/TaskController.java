@@ -41,10 +41,11 @@ public class TaskController {
 	@Autowired
 	TaskService service;
 
-	@GetMapping("/test")
-	public String test() {
-		return "Success";
+	@GetMapping("/tasktype")
+	public List<String> getTaskType() {
+		return service.getTaskTypesFromPLM_WAR();
 	}
+	
 	
 	@GetMapping("/list")
 	public Object getAllTask() {
