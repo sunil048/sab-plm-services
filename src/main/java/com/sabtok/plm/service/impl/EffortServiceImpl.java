@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.sabtok.plm.dao.EffortsDao;
+import com.sabtok.plm.dao.Logdao;
 import com.sabtok.plm.entity.Efforts;
 import com.sabtok.plm.service.EffortService;
 
@@ -15,7 +16,7 @@ public class EffortServiceImpl implements EffortService{
 
 	@Autowired
 	EffortsDao effortsDao;
-	
+		
 	@Override
 	public String logEfforts(String taskId, String taskType,int hours,String comment) {
 		// TODO Auto-generated method stub

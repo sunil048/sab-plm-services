@@ -43,10 +43,9 @@ public class ReleaseActivitiesController {
 	//@RequestMapping(value="/release/create",method=RequestMethod.POST)
 	@PostMapping("/release/create")
 	@ResponseBody
-	public String createReleaseActivity(@RequestBody Release rel) {
-		System.out.println(rel);
+	public Boolean createReleaseActivity(@RequestBody Release rel) {
 		releaseService.createReleaseActivity(rel);
-		return "added";
+		return true;
 	}
 	
 

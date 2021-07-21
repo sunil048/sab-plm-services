@@ -51,6 +51,11 @@ public class SubTaskController {
 		return subTaskServ.getSubTaskList(taskId);
 	}
 	
+	@GetMapping("/sub-taskname-list/{TaskID}")
+	List <String> getSubTaskNameList(@PathVariable("TaskID") String taskId){
+		return subTaskServ.getSubTaskNameList(taskId);
+	}
+	
 	@PostMapping("/close")
 	public String closeTask(@RequestBody Map<String,String> taskDetails) {
 		boolean result = subTaskServ.closeTask(taskDetails.get("SUB_TASK_ID"), DateUtils.getDateString());

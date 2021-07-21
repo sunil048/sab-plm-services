@@ -30,6 +30,12 @@ public interface Logdao extends JpaRepository<Log, Long>{
 	
 	public List<Log> getLogListByProjectIn(List<String> projects);
 	
+	@Query(value = "SELECT SUM(efforts) FROM Logs where project=:taskID", nativeQuery = true)
+	public Long getTotalEffortForTaskID(@Param("taskID") String taskID);
+	
+	@Query(value = "SELECT SUM(efforts) FROM LOGS", nativeQuery = true)
+	public Long getTotalEffort();
+	
 	
 	
 }

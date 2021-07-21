@@ -48,6 +48,10 @@ public class SubTaskServiceImpl implements SubTaskService {
 		}
 		return false;
 	}
+	@Override
+	public List<String> getSubTaskNameList(String taskId) {
+		return stDao.getSubTaskNameList(taskId);
+	}
 	
 	
 }

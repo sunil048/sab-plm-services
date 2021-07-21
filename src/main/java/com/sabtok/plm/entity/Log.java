@@ -44,6 +44,11 @@ public class Log implements Serializable {
 	@Column(name="FILENAME")
 	private String fileName;
 	
+	@Column(name="SUB_TASK")
+	private String subtask;
+	
+	@Column(name="EFFORTS", columnDefinition = "int(4) default 0")
+	private int efforts = 0;
 
 	@Override
 	public String toString() {
@@ -64,7 +69,6 @@ public class Log implements Serializable {
 	public void setId(String id) {
 		this.id = id;
 	}
-	
 	
 	public String getDate() {
 		return date;
@@ -88,6 +92,19 @@ public class Log implements Serializable {
 	public void setDetails(String details) {
 		this.details = details;
 	}
+	
+	public String getSubtask() {
+		return subtask;
+	}
+	public void setSubtask(String subtask) {
+		this.subtask = subtask;
+	}
+	public int getEfforts() {
+		return efforts;
+	}
+	public void setEfforts(int effort) {
+		this.efforts = effort;
+	}
 	public Log(Long rowNo, String id, String date, String project, String details, String fileName) {
 		super();
 		this.rowNo = rowNo;
@@ -96,6 +113,18 @@ public class Log implements Serializable {
 		this.project = project;
 		this.details = details;
 		this.fileName = fileName;
+	}
+	public Log(Long rowNo, String id, String date, String project, String details, String fileName, String subtask,
+			int effort) {
+		super();
+		this.rowNo = rowNo;
+		this.id = id;
+		this.date = date;
+		this.project = project;
+		this.details = details;
+		this.fileName = fileName;
+		this.subtask = subtask;
+		this.efforts = effort;
 	}
 	
 	

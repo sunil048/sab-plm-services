@@ -67,12 +67,18 @@ public class LogController {
 			@RequestParam("SLNO") Long slNo,
 			@RequestParam("PROJECT") String project,
 			@RequestParam("DETAIL") String details,
+			@RequestParam("SUBTASK") String subtask,
+			@RequestParam("EFFORT") String effort,
 			@RequestParam(value="ATTACHEDFILE",required=false) MultipartFile attachedFile) throws IOException, SerialException, SQLException {
 		Log log = new Log();
 		log.setRowNo(slNo);
 		log.setProject(project);
 		log.setDetails(details);
 		log.setId(IDGenerator.getUUID().toString());
+		log.setSubtask(subtask);
+		if (effort == null || effort.isBlank() || effort.isEmpty())
+			effort = "0";
+		log.setEfforts(Integer.valueOf(effort));
 		//since log is creating first need file name if attached file found in request
 		 if (attachedFile != null) {
 			 log.setFileName(attachedFile.getOriginalFilename());
@@ -102,6 +108,15 @@ public class LogController {
 	@GetMapping("/logdetails/{rowno}")
 	public Log getLog(@PathVariable("rowno") Long rowNo) {
 		return logService.getLogDetails(rowNo).get();
+	}
+	
+	@GetMapping("/totaleffort/{taskID}")
+	public String getTotalEffortForTask(@PathVariable("taskID") String taskID) {
+		return String.valueOf(logService.getTotalEffortForTask(taskID));
+	}
+	@GetMapping("/totaleffort")
+	public String getTotalEffort() {
+		return String.valueOf(logService.getTotalEffort());
 	}
 	
 	@GetMapping("/dashboard")

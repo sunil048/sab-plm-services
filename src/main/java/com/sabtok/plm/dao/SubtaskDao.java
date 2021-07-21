@@ -29,4 +29,7 @@ public interface SubtaskDao extends JpaRepository<SubTask, String> {
 	@Modifying
 	@Query("update SubTask set closeddate = ?1, status='Closed' where subTaskId = ?2")
 	public int closeSubTask(String closedDate, String subtaskid);
+	
+	@Query("select name from SubTask where taskid=?1")
+	public List<String> getSubTaskNameList(String taskId);
 }
