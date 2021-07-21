@@ -31,7 +31,7 @@ public class IDGenerator {
 	}
 	
 	public static Long generateTaskId() {
-		int randomPIN = (int)(Math.random()*90000000)+1000;
+		int randomPIN = (int)(Math.random()*900000000)+1000;
 		return Long.valueOf(randomPIN);
 	}
 	
@@ -42,7 +42,7 @@ public class IDGenerator {
 
 	}
 	public static Long getIssueId() {
-		int randomPIN = (int)(Math.random()*90000000)+1000;
+		int randomPIN = (int)(Math.random()*900000000)+1000;
 		return Long.valueOf(randomPIN);
 	}
 	
@@ -52,7 +52,7 @@ public class IDGenerator {
 	}
 	
 	public static Integer getReleaseId() {
-		int randomPIN = (int)(Math.random()*900000)+1000;
+		int randomPIN = (int)(Math.random()*900000000)+1000;
 		return Integer.valueOf(randomPIN);
 	}
 	
