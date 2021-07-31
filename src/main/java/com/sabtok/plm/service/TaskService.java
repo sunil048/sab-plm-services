@@ -21,6 +21,7 @@ public interface TaskService {
 
 	public List<String> getTaskTypesFromPLM_WAR();
 	public List <Task> getAllTasks();
+	public List <Task> getAllTasksForProject(String projectName);
 	public Optional<Task> getTaskDetail(String taskId);
 	public Task saveTask(Task task);
 	public boolean closeTask(String taskId,String closeDate);

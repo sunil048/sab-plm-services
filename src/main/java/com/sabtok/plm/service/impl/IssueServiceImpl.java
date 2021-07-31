@@ -99,5 +99,12 @@ public class IssueServiceImpl implements IssueService {
 		return issueDao.getOpenIssuesCount();
 	}
 
+
+	@Override
+	public List<Issue> getIssueListForProject(String projectName) {
+		// TODO Auto-generated method stub
+		return issueDao.getAllByProject(projectName);
+	}
+
 	
 }

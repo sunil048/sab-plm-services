@@ -48,6 +48,8 @@ public interface TaskDao extends JpaRepository<Task, String> {
 	//Added custom method this is not default method
 	List<Task> getListByStatus(String status);
 	
+	List<Task> getListByProjectName(String projectName);
+	
 	@Query("select count(*) from Task where status='Open' OR status='open'")
 	public Integer getOpenTaskCount();
 	

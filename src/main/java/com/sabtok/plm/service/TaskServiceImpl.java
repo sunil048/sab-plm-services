@@ -179,4 +179,9 @@ public class TaskServiceImpl implements TaskService {
 		return new ArrayList();
 	}
 
+	@Override
+	public List<Task> getAllTasksForProject(String projectName) {
+		return tdao.getListByProjectName(projectName);
+	}
+
 }

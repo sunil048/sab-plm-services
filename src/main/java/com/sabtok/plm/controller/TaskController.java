@@ -52,6 +52,11 @@ public class TaskController {
 		return service.getAllTasks();
 	}
 	
+	@GetMapping("/list-project/{projectName}")
+	public Object getAllTask(@PathVariable("projectName") String projectName) {
+		return service.getAllTasksForProject(projectName);
+	}
+	
 	@GetMapping("/detail/{taskId}")
 	public Object getDetail(@PathVariable String taskId) {
 		Assert.notNull(taskId,"No task Id");

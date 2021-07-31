@@ -128,6 +128,10 @@ public class ExceptionController {
 		return issueService.getIssueList();
 	}
 	
+	@GetMapping("/list-project/{projectName}")
+	public Object getIssueListForProject(@PathVariable("projectName") String projectName) {
+		return issueService.getIssueListForProject(projectName);
+	}
 	
 	@GetMapping("/getIssue/{rowNo}")
 	public Object getIssue(@PathVariable String rowNo) {
