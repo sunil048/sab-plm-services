@@ -9,8 +9,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.sabtok.plm.dao.MyDao;
 import com.sabtok.plm.dao.ProjectDao;
 import com.sabtok.plm.entity.Project;
+import java.util.Map;
 import com.sabtok.plm.service.ProjectService;
 
 /**
@@ -27,6 +29,9 @@ public class ProjectServiceImpl implements ProjectService {
 	@Autowired
 	ProjectDao projectdao;
 	
+	@Autowired
+	MyDao myDao;
+	
 	@Override
 	public List<String> getProjectNames() {
 		return projectdao.getProjectNameList();
@@ -40,6 +45,12 @@ public class ProjectServiceImpl implements ProjectService {
 	@Override
 	public List<Project> getProjectList() {
 		return projectdao.findAll();
+	}
+
+	@Override
+	public Map <String, String> getProjectNameVersion(String projectId) {
+		Object proj = myDao.getProjectNameVersion(projectId);
+		return null;
 	}
 
 }

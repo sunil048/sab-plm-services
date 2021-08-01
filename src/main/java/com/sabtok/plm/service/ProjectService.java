@@ -4,6 +4,7 @@
 package com.sabtok.plm.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
@@ -20,4 +21,5 @@ public interface ProjectService {
 	public List<String> getProjectNames();
 	public Project  getProjectdetails(String projectId);
 	public List<Project> getProjectList();
+	public Map<String,String> getProjectNameVersion(String projectId);
 }
