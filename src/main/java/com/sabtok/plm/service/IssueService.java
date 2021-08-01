@@ -17,6 +17,7 @@ public interface IssueService {
 
 	public String saveIssue(Issue issue);
 	public List<Issue> getIssueList();
+	public List<Issue> getIssueListForProject(String projectName);
 	public Optional<Issue> getIssue(int rowNo);
 	public int updateIssueActionTaken(String issueID,String actionTaken);
 	public int closeIssue(String issueID,String closedDate);

@@ -3,6 +3,8 @@
  */
 package com.sabtok.plm.dao;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -38,5 +40,11 @@ public interface IssueDao extends JpaRepository<Issue, Integer>{
 	
 	@Query("select count (*) from Issue where issue_status=0")
 	public Integer getOpenIssuesCount();
+	
+	//Not working
+	//public List<Issue> findAllByProject(String project);
+	
+	@Query("from Issue where project=:projectName")
+	public List<Issue> getAllByProject(@Param("projectName") String projectName);
 	
 }

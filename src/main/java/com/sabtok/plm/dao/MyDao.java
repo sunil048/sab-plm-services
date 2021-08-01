@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
+import java.util.Map;
 import java.util.Vector;
 
 import javax.persistence.EntityManager;
@@ -19,6 +20,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.stereotype.Component;
 
+import com.sabtok.plm.entity.Project;
 import com.zaxxer.hikari.util.DriverDataSource;
 
 /**
@@ -106,5 +108,12 @@ public class MyDao {
 		}
 		
 		return taskTypes;
+	}
+	
+	public Project getProjectNameVersion(String projectId){
+		//Query q = em.createNativeQuery("select NAME ,CURRENT_VERSION from sabprojects where sabprojects.projectId = :projId");
+		
+		Project proj = em.find(Project.class, projectId);
+		return proj;
 	}
 }
