@@ -15,6 +15,8 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,6 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.sabtok.plm.dao.MyDao;
 import com.sabtok.plm.entity.Project;
 import com.sabtok.plm.service.ProjectService;
+import com.sabtok.plm.util.IDGenerator;
 
 /**
  * @author Sunil
@@ -74,6 +77,18 @@ public class ProjectController {
 	@GetMapping("/list")
 	public List<Project> getAllProjects(){
 		return projectService.getProjectList();
+	}
+	
+	@PostMapping("/save")
+	public Project registerProject(@RequestBody Project project) {
+		project.setProjectId("SAB"+IDGenerator.getProjectId());
+		return projectService.saveProject(project);
+	}
+	
+	@PostMapping("/update")
+	public Project updateProject(@RequestBody Project project) {
+		System.out.println(project);
+		return projectService.updateProject(project);
 	}
 	
 }

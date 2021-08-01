@@ -1,6 +1,7 @@
 package com.sabtok.plm.entity;
 
 import java.io.Serializable;
+import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -15,6 +16,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -49,7 +51,19 @@ public class Project implements Serializable {
     private String description;
    
     @Column(name="NOTES")
+    @Lob
     private String notes;
+    
+    @Column(name="TEST_ENV")
+    private String testingEnv;
+    
+    @Column(name="DEV_ENV")
+    @Lob
+    private String devEnv;
+    
+    @Column(name="PROD_ENV")
+    @Lob
+    private String prodEnv;
 
 	/*@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
 	@JoinTable(name="PROJECT_SKILLS",joinColumns={@JoinColumn(name="PROJECT_ID")},inverseJoinColumns={@JoinColumn(name="SKILL_ITEM_ID")})
@@ -117,8 +131,6 @@ public class Project implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
 
-
-
 	public Project(String projectId, String projectName) {
 		super();
 		this.projectId = projectId;
@@ -134,4 +146,31 @@ public class Project implements Serializable {
 		this.projectName = projectName;
 	}
 
+	public String getTestingEnv() {
+		return testingEnv;
+	}
+
+	public void setTestingEnv(String testingEnv) {
+		this.testingEnv = testingEnv;
+	}
+
+	public String getDevEnv() {
+		return devEnv;
+	}
+
+	public void setDevEnv(String devEnv) {
+		this.devEnv = devEnv;
+	}
+
+	public String getProdEnv() {
+		return prodEnv;
+	}
+
+	public void setProdEnv(String prodEnv) {
+		this.prodEnv = prodEnv;
+	}
+
+	
+	
+	
 }
