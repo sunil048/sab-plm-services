@@ -14,6 +14,11 @@ import javax.persistence.Table;
 @Table(name="BACKUPDATA")
 public class BackUp implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@Column(name="ID")
 	private String itemId;

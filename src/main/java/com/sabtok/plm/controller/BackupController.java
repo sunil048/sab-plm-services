@@ -21,7 +21,7 @@ import com.sabtok.plm.util.IDGenerator;
 public class BackupController {
 
 	@Autowired
-	BackupService backupService;
+	private BackupService backupService;
 	
 	@GetMapping("/list")
 	public List<? extends BackUp> getBackUpList() {
