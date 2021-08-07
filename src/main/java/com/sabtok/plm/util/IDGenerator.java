@@ -76,6 +76,11 @@ public class IDGenerator {
 		return randomPIN;
 	}
 	
+	public static int getBackItemId() {
+		int randomPIN = (int)(Math.random()*900000)+1000;
+		return randomPIN;
+	}
+	
 	public static UUID getUUID(){
 		return UUID.randomUUID();
 	}

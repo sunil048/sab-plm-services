@@ -53,4 +53,15 @@ public class ProjectServiceImpl implements ProjectService {
 		return null;
 	}
 
+	@Override
+	public Project saveProject(Project project) {
+		return projectdao.save(project);
+	}
+
+	@Override
+	public Project updateProject(Project project) {
+		// TODO Auto-generated method stub
+		return projectdao.saveAndFlush(project);
+	}
+
 }
