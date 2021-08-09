@@ -49,7 +49,16 @@ public class Log implements Serializable {
 	
 	@Column(name="EFFORTS", columnDefinition = "int(4) default 0")
 	private int efforts = 0;
-
+	
+	@Column(name="SKILL")
+	private String skill;
+	
+	public String getSkill() {
+		return skill;
+	}
+	public void setSkill(String skill) {
+		this.skill = skill;
+	}
 	@Override
 	public String toString() {
 		return "Log [rowNo=" + rowNo + ", id=" + id + ", date=" + date + ", project=" + project + ", details=" + details
