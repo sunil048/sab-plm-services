@@ -18,6 +18,11 @@ import javax.persistence.Table;
 @Table(name = "PROJECTSKILLS")
 public class ProjectSkill implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@Column(name = "ITEM_ID",unique=true)
 	private Integer itemId;
@@ -34,7 +39,7 @@ public class ProjectSkill implements Serializable {
 	@Column(name="PROJECT")
 	private String projectId;
 	
-	@Column(name="PROJECT_VERSION",columnDefinition = "default 0")
+	@Column(name="PROJECT_VERSION",columnDefinition = "double default 0")
 	private Double projectVersion;
 	
 

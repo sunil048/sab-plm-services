@@ -68,6 +68,7 @@ public class LogController {
 			@RequestParam("PROJECT") String project,
 			@RequestParam("DETAIL") String details,
 			@RequestParam("SUBTASK") String subtask,
+			@RequestParam("SKILL") String skill,
 			@RequestParam("EFFORT") String effort,
 			@RequestParam(value="ATTACHEDFILE",required=false) MultipartFile attachedFile) throws IOException, SerialException, SQLException {
 		Log log = new Log();
@@ -76,7 +77,8 @@ public class LogController {
 		log.setDetails(details);
 		log.setId(IDGenerator.getUUID().toString());
 		log.setSubtask(subtask);
-		if (effort == null || effort.isBlank() || effort.isEmpty())
+		log.setSkill(skill);
+		if (effort == null || effort.isEmpty())//prod bug fix effort.isBlank() is in 11 but prod is 1.8
 			effort = "0";
 		log.setEfforts(Integer.valueOf(effort));
 		//since log is creating first need file name if attached file found in request

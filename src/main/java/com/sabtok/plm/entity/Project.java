@@ -29,6 +29,11 @@ import javax.persistence.Table;
 @Entity
 @Table(name="SABPROJECTS")
 public class Project implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
     @Column(name="PROJECT_ID")
 	private String projectId;
