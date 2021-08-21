@@ -9,6 +9,9 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.ModelMap;
@@ -35,6 +38,8 @@ import com.sabtok.plm.util.IDGenerator;
 @RestController
 @RequestMapping("/project")
 public class ProjectController {
+	
+	private static Logger logger = LoggerFactory.getLogger(ProjectController.class);
 
 	@Autowired
 	ProjectService projectService;

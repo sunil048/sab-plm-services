@@ -38,6 +38,7 @@ public class Log implements Serializable {
 	@Column(name="PROJECT")
 	private String project;
 	
+	@Lob
 	@Column(name="DETAILS")
 	private String details;
 	

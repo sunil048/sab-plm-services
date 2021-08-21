@@ -102,6 +102,44 @@ public class LogController {
 		return log;
 	}
 	
+	@PostMapping("/save-comment")
+	public Log saveIssueCommentsInLog(
+			@RequestParam("PROJECT") String project,
+			@RequestParam("DETAIL") String details,
+			@RequestParam(value = "SUBTASK", required = false) String subtask,
+			@RequestParam(value="SKILL",required = false) String skill,
+			@RequestParam("EFFORT") String effort,
+			@RequestParam(value="ATTACHEDFILE",required=false) MultipartFile attachedFile) throws IOException, SerialException, SQLException {
+		Log log = new Log();
+		log.setRowNo(logService.nextLogRowno());
+		log.setProject(project);
+		log.setDetails(details);
+		log.setId(IDGenerator.getUUID().toString());
+		
+		if (effort == null || effort.isEmpty())//prod bug fix effort.isBlank() is in 11 but prod is 1.8
+			effort = "0";
+		log.setEfforts(Integer.valueOf(effort));
+		//since log is creating first need file name if attached file found in request
+		 if (attachedFile != null) {
+			 log.setFileName(attachedFile.getOriginalFilename());
+		 }
+		log.setDate(DateUtils.getDateString());
+		log = logService.saveLog(log);
+		 if (attachedFile != null) {
+		    	byte[] bytedata = attachedFile.getBytes();
+				AttachedFile file = new AttachedFile();
+				file.setDocumentNo(IDGenerator.getDocumentId());
+				file.setParentId(log.getProject());
+				file.setDocumentName(attachedFile.getOriginalFilename());
+				file.setFileType(attachedFile.getContentType());
+				file.setUploadedTime(DateUtils.getDateString());
+				Blob myBlob = new SerialBlob(bytedata);
+				file.setDocument(myBlob);;
+				attachFileService.saveAttachement(file);
+		    }
+		return log;
+	}
+	
 	@GetMapping("/nextlogRowNumber")
 	public String getNextLogNumber() {
 		return String.valueOf(logService.nextLogRowno());

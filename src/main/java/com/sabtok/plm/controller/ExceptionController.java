@@ -23,6 +23,8 @@ import javax.sql.rowset.serial.SerialBlob;
 
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.bson.Document;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.beans.factory.annotation.Value;
@@ -74,6 +76,8 @@ import javassist.bytecode.analysis.MultiArrayType;
 @RestController
 @RequestMapping("issue")
 public class ExceptionController {
+	
+	private static Logger logger = LoggerFactory.getLogger(ExceptionController.class);
 	
 	@Autowired
 	MangoDAO<Document> mongoDao;
