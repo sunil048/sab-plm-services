@@ -20,6 +20,9 @@ import com.sabtok.plm.entity.Project;
 public interface ProjectDao extends JpaRepository<Project, String> {
 	
 	@Query("select concat(p.projectName,'-',p.currentVersion) from Project p")
+	public List<String> getProjectNameListWithCurrentVersion();
+	
+	@Query("select p.projectName from Project p")
 	public List<String> getProjectNameList();
 
 }

@@ -73,6 +73,9 @@ public class Task {
 	@Column(name="PROJECT_NAME")
 	private String projectName;
 	
+	@Column(name="PROJECT_VERSION")
+	private Double projectVersion;
+	
 	public String getProjectName() {
 		return projectName;
 	}
@@ -159,6 +162,14 @@ public class Task {
 
 	public void setSubTasks(List<SubTask> subTasks) {
 		this.subTasks = subTasks;
+	}
+
+	public Double getProjectVersion() {
+		return projectVersion;
+	}
+
+	public void setProjectVersion(Double projectVersion) {
+		this.projectVersion = projectVersion;
 	}
 
 	@Override

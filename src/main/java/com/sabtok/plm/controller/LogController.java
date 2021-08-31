@@ -27,7 +27,9 @@ import org.springframework.web.multipart.MultipartFile;
 import com.sabtok.plm.entity.AttachedFile;
 import com.sabtok.plm.entity.Log;
 import com.sabtok.plm.entity.AttachedFile.FileData;
+import com.sabtok.plm.entity.Comment;
 import com.sabtok.plm.service.AttachedFileService;
+import com.sabtok.plm.service.CommentService;
 import com.sabtok.plm.service.LogService;
 import com.sabtok.plm.util.DateUtils;
 import com.sabtok.plm.util.FileUtils;
@@ -48,6 +50,9 @@ public class LogController {
 	private LogService logService;
 	
 	@Autowired
+	private CommentService commentService;
+	
+	@Autowired
 	private FileUtils fileServices;
 	
 	@Autowired
@@ -60,6 +65,11 @@ public class LogController {
 	@GetMapping("/projectlogs/{projectId}")
 	public List<Log> getLogListByProject(@PathVariable("projectId") String project){
 		return logService.getLogListByProject(project);
+	}
+	
+	@GetMapping("/comments/{projectId}")
+	public List<Comment> getComments(@PathVariable("projectId") String project){
+		return commentService.getComment(project);
 	}
 	
 	@PostMapping("/save")
@@ -102,8 +112,8 @@ public class LogController {
 		return log;
 	}
 	
-	@PostMapping("/save-comment")
-	public Log saveIssueCommentsInLog(
+	@PostMapping("/save-comment1")
+	public Log saveIssueCommentsInLog1(
 			@RequestParam("PROJECT") String project,
 			@RequestParam("DETAIL") String details,
 			@RequestParam(value = "SUBTASK", required = false) String subtask,
@@ -138,6 +148,52 @@ public class LogController {
 				attachFileService.saveAttachement(file);
 		    }
 		return log;
+	}
+	
+	@PostMapping("/save-comment")
+	public Comment saveIssueCommentsInLog(
+			@RequestParam("PROJECT") String project,
+			@RequestParam("DETAIL") String details,
+			@RequestParam(value = "SUBTASK", required = false) String subtask,
+			@RequestParam(value="SKILL",required = false) String skill,
+			@RequestParam("EFFORT") String effort,
+			@RequestParam(value="ATTACHEDFILE",required=false) MultipartFile attachedFile) throws IOException, SerialException, SQLException {
+		Comment cm = new Comment();
+		cm.setId(IDGenerator.getCommentId());
+		cm.setProject(project);
+		cm.setDetails(details);
+		
+		Log log = new Log();
+	//	log.setProject(project);
+	//	log.setDetails(details);
+	//	log.setId(IDGenerator.getUUID().toString());
+		
+		if (effort == null || effort.isEmpty())//prod bug fix effort.isBlank() is in 11 but prod is 1.8
+			effort = "0";
+		//log.setEfforts(Integer.valueOf(effort));
+		cm.setEffort(Integer.valueOf(effort));
+		//since log is creating first need file name if attached file found in request
+		 if (attachedFile != null) {
+			// log.setFileName(attachedFile.getOriginalFilename());
+			 cm.setFileName(attachedFile.getOriginalFilename());
+		 }
+		//log.setDate(DateUtils.getDateString());
+		cm.setDate(DateUtils.getDateString());
+		//log = logService.saveLog(log);
+		cm = commentService.saveComment(cm);
+		 if (attachedFile != null) {
+		    	byte[] bytedata = attachedFile.getBytes();
+				AttachedFile file = new AttachedFile();
+				file.setDocumentNo(IDGenerator.getDocumentId());
+				file.setParentId(cm.getProject());
+				file.setDocumentName(attachedFile.getOriginalFilename());
+				file.setFileType(attachedFile.getContentType());
+				file.setUploadedTime(DateUtils.getDateString());
+				Blob myBlob = new SerialBlob(bytedata);
+				file.setDocument(myBlob);;
+				attachFileService.saveAttachement(file);
+		    }
+		return cm;
 	}
 	
 	@GetMapping("/nextlogRowNumber")
