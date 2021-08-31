@@ -19,17 +19,14 @@ public class Issue implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
 	
 		@Id
 	   // @GeneratedValue(strategy=GenerationType.IDENTITY)
 	    @Column(name="SLNO")
 		private Integer rowNo;
-	    
 		
 	    @Column(name="ISSUEID")
 		private String issueID;
-	    
 	 
 	    @Column(name="ISSUE_DATE")
 	    private String issueDate;
@@ -45,7 +42,6 @@ public class Issue implements Serializable{
 	    
 	    @Column(name="PRIORITY")
 	    private String priority;
-	    
 	
 	    @Column(name="FILE_NAME")
 	    private String fileName;
@@ -55,7 +51,6 @@ public class Issue implements Serializable{
 	    
 	    @Column(name="ACTION_TAKEN")
 	    private String actionTaken;
-	    
 	   
 	    @Column(name="CLOSED_DATE")
 	    private String closedDate;
@@ -63,15 +58,22 @@ public class Issue implements Serializable{
 	    @Column(name="RELATED_ISSUE")
 	    private String relatedIssue;
 	    
-	    
 	    @Column(name = "ISSUE_STATUS",nullable=false)
 	    private boolean isClosed = false;
 	    
 	    @JsonIgnore
 	    private String fileData;
 	    
+	    @Column(name="Version")
+	    private String projectVersion;
 	    
-	    public String getFileName() {
+	    public String getProjectVersion() {
+			return projectVersion;
+		}
+		public void setProjectVersion(String projectVersion) {
+			this.projectVersion = projectVersion;
+		}
+		public String getFileName() {
 			return fileName;
 		}
 		public void setFileName(String fileName) {
