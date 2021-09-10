@@ -80,8 +80,16 @@ public class IDGenerator {
 		int randomPIN = (int)(Math.random()*900000)+1000;
 		return randomPIN;
 	}
+	public static int getSprintId() {
+		int randomPIN = (int)(Math.random()*900000)+1000;
+		return randomPIN;
+	}
 	
 	public static UUID getUUID(){
 		return UUID.randomUUID();
+	}
+	
+	public static String getCommentId() {
+		return UUID.randomUUID().toString();
 	}
 }
