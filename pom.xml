@@ -85,7 +85,7 @@
 
 	<build>
 	<!-- <finalName>${artifactId}</finalName> -->
-	<finalName>sab-plm-services-2.3</finalName>
+	<finalName>sab-plm-services-2.4</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
