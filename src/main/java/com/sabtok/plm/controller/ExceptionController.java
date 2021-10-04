@@ -96,8 +96,8 @@ public class ExceptionController {
 	
 	@SuppressWarnings("unchecked")
 	@PostMapping("/save")
-	public ResponseEntity<String> saveException(@RequestParam(value="DOCUMENT",required=false) MultipartFile attachedFile ,
-			@RequestParam("BODY") String issuePayload) throws ParseException, IOException {
+	public ResponseEntity<String> saveException(@RequestParam("BODY") String issuePayload,@RequestParam(value="DOCUMENT",required=false) MultipartFile attachedFile
+			) throws ParseException, IOException {
 		try {
 		    Issue issue = (Issue) JsonUtil.converStringToObject(issuePayload, Issue.class);
 		    String issueID = issuidprefix+IDGenerator.getIssueId();
