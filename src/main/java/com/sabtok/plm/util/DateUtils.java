@@ -34,7 +34,7 @@ public class DateUtils {
 	}
 	
 	public static String  getDateString() {
-		SimpleDateFormat formate = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+		SimpleDateFormat formate = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
 		String date = null;
 		date = formate.format(new Date());
 		System.out.println(date);
