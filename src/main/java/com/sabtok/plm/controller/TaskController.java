@@ -8,6 +8,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.jboss.logging.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.util.Assert;
@@ -38,6 +40,8 @@ import com.sabtok.plm.util.IDGenerator;
 @RequestMapping("/task")
 public class TaskController {
 	
+	private static org.slf4j.Logger logger = LoggerFactory.getLogger(TaskController.class);
+	
 	@Autowired
 	TaskService service;
 
@@ -49,6 +53,7 @@ public class TaskController {
 	
 	@GetMapping("/list")
 	public Object getAllTask() {
+		logger.info("Getting task list####################################################################");
 		return service.getAllTasks();
 	}
 	
