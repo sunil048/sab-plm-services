@@ -1,4 +1,5 @@
 FROM openjdk:8-jdk-alpine
 ARG JAR_FILE=target/*.jar
 COPY target/sab-plm-services-2.5.jar app.jar
+EXPOSE 8082
 ENTRYPOINT ["java","-jar","/app.jar"]
