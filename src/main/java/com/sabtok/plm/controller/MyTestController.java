@@ -111,7 +111,7 @@ public class MyTestController {
 		}
 		studentList.put("STUDENT_NAME", studentNameValue);
 		studentList.put("TOTAL_TEST_NUMBERS", passList.size()+failList.size());
-		studentList.put("PASSAD_NUMBERS", passList.size());
+		studentList.put("PASSED_NUMBERS", passList.size());
 		studentList.put("FAILED_NUMBERS",failList.size());
 		return studentList;
 		
