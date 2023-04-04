@@ -98,12 +98,15 @@ public class ExceptionController {
 	@PostMapping("/save")
 	public ResponseEntity<String> saveException(@RequestParam("BODY") String issuePayload,@RequestParam(value="DOCUMENT",required=false) MultipartFile attachedFile
 			) throws ParseException, IOException {
+		logger.info("Saving issue");
 		try {
 		    Issue issue = (Issue) JsonUtil.converStringToObject(issuePayload, Issue.class);
+		    logger.debug("Generating issue id");
 		    String issueID = issuidprefix+IDGenerator.getIssueId();
 			issue.setIssueID(issueID);
 		    if (attachedFile != null) {
 		    	//String fileName = issueID+"_"+attachedFile.getOriginalFilename() ;
+		    	logger.info("Saving attched file as bytes[]");
 		    	byte[] bytedata = attachedFile.getBytes();
 		    	AttachedFile file = new AttachedFile();
 				file.setDocumentNo(IDGenerator.getDocumentId());
@@ -115,9 +118,11 @@ public class ExceptionController {
 				file.setDocument(myBlob);;
 				file = fileServ.saveAttachement(file);
 				issue.setFileName(issue.getIssueID()+"_"+attachedFile.getOriginalFilename());//Need to display file name in issue form
+				logger.info("Document saved");
 		    }
 		    String issueId = issueService.saveIssue(issue);
 			//return new ResponseEntity <>(HttpStatus.OK).ok("Issue Created successfully ID ="+issueId);
+		    logger.info("Issue saved  "+issueId);
 			return new ResponseEntity <>(HttpStatus.OK).ok(issueId);
 			//return "Issue Created successfully ID ="+issueID;
 		}catch (Exception e) {
@@ -129,11 +134,13 @@ public class ExceptionController {
 	
 	@GetMapping("/list")
 	public Object getIssueList() {
+		logger.debug("Getting issue list");
 		return issueService.getIssueList();
 	}
 	
 	@GetMapping("/list-project/{projectName}")
 	public Object getIssueListForProject(@PathVariable("projectName") String projectName) {
+		logger.debug("Getting issue list for the project "+ projectName);
 		return issueService.getIssueListForProject(projectName);
 	}
 	
