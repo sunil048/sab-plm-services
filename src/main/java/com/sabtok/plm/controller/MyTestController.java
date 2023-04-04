@@ -1,7 +1,9 @@
 package com.sabtok.plm.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.websocket.server.PathParam;
 
@@ -75,4 +77,54 @@ public class MyTestController {
 		return myTestDao.findAll();
 	}
 	
+	@GetMapping("/list/{studentname}")
+	public List<MyTest> getMyTestList(@PathVariable String studentname){
+		System.out.println("Recived student name" + studentname);
+		List<MyTest> stlist = myTestDao.findAllByStudent(studentname);
+		return stlist;
+	}
+	
+	@GetMapping("/test")
+	public String test() {
+		return "Success";
+	}
+	
+	@GetMapping("/dashboard/{studentNameValue}")
+	public Object getMyTestDashBoardDetails(@PathVariable String studentNameValue) {
+		Map<String,Object> testDetails = new HashMap<String,Object>();
+		List<MyTest> passList = new ArrayList();
+		List<MyTest> failList = new ArrayList();
+		
+		List<MyTest> totalList = myTestDao.findAll();
+		Map <String, Object> studentList =  new HashMap<String,Object>();
+		for (MyTest test : totalList) {
+			String studentName = test.getStudent();
+			Integer NoOfAttemptes = test.getNumOfAttemptes();
+			if (studentName.equalsIgnoreCase(studentNameValue)) {
+				if(test.getResulte())
+					passList.add(test);
+				else
+					failList.add(test);
+			}
+			
+		}
+		studentList.put("STUDENT_NAME", studentNameValue);
+		studentList.put("TOTAL_TEST_NUMBERS", passList.size()+failList.size());
+		studentList.put("PASSED_NUMBERS", passList.size());
+		studentList.put("FAILED_NUMBERS",failList.size());
+		return studentList;
+		
+	}
+	
+	@GetMapping("/dashboard")
+	public Object getMyTestDashBoardDetails1() {
+		List<String> studentNames = myTestDao.getStudentNamesList();
+		Map<String,Object> testDetails = new HashMap<String,Object>();
+		List <Object> testDetails1 = new ArrayList<>();
+		for (String studentName : studentNames) {
+			Map<String,Object> testDetailsTemp = (Map<String, Object>) getMyTestDashBoardDetails(studentName);
+			testDetails1.add(testDetailsTemp);
+		}
+		return testDetails1;
+	}
 }
