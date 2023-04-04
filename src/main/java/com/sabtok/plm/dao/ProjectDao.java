@@ -24,5 +24,8 @@ public interface ProjectDao extends JpaRepository<Project, String> {
 	
 	@Query("select p.projectName from Project p")
 	public List<String> getProjectNameList();
+	
+	@Query("select currentVersion from Project where projectId = ?1")
+	public Double getCurrentVersion(String projectId);
 
 }

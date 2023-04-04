@@ -64,4 +64,14 @@ public class ProjectServiceImpl implements ProjectService {
 		return projectdao.saveAndFlush(project);
 	}
 
+	@Override
+	public Double getProjectCurrentVersion(String projevtId) {
+		System.out.println("This is service "+projevtId);
+		Double currentVersion = projectdao.getCurrentVersion(projevtId);
+		if ( currentVersion == null ) {
+			return 0.0;
+		}
+		return currentVersion;
+	}
+
 }
