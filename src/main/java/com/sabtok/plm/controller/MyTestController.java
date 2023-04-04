@@ -92,7 +92,6 @@ public class MyTestController {
 	@GetMapping("/dashboard/{studentNameValue}")
 	public Object getMyTestDashBoardDetails(@PathVariable String studentNameValue) {
 		Map<String,Object> testDetails = new HashMap<String,Object>();
-		List<MyTest> list = new ArrayList();
 		List<MyTest> passList = new ArrayList();
 		List<MyTest> failList = new ArrayList();
 		
