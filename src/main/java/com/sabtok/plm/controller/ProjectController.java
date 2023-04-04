@@ -96,11 +96,11 @@ public class ProjectController {
 		return projectService.updateProject(project);
 	}
 	
-	@GetMapping("/current-version/{projectId}")
-	public Object getCurentVersion(@PathVariable String projectId) {
-	Double currentVersion = projectService.getProjectCurrentVersion(projectId);
+	@GetMapping("/current-version/{projectName}")
+	public Object getCurentVersion(@PathVariable String projectName) {
+	Double currentVersion = projectService.getProjectCurrentVersion(projectName);
 	if (currentVersion == 0.0)
-		return "Project Not found for given project Id " +projectId;
+		return "Project Not found for given project Id " +projectName;
 		else 
 		return currentVersion;
 	}

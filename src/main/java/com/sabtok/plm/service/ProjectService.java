@@ -24,5 +24,5 @@ public interface ProjectService  {
 	public Map<String,String> getProjectNameVersion(String projectId);
 	public Project saveProject(Project project);
 	public Project updateProject(Project project);
-	public Double getProjectCurrentVersion(String projevtId);
+	public Double getProjectCurrentVersion(String projectName);
 }
