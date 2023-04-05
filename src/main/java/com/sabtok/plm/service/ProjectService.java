@@ -16,7 +16,7 @@ import com.sabtok.plm.entity.Project;
  * ProjectService.java Aug 9, 2020 5:30:04 PM
  */
 @Service
-public interface ProjectService {
+public interface ProjectService  {
 
 	public List<String> getProjectNames();
 	public Project  getProjectdetails(String projectId);
@@ -24,4 +24,5 @@ public interface ProjectService {
 	public Map<String,String> getProjectNameVersion(String projectId);
 	public Project saveProject(Project project);
 	public Project updateProject(Project project);
+	public Double getProjectCurrentVersion(String projectName);
 }
