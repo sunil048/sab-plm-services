@@ -105,7 +105,7 @@ public class AppConstants {
 	    Properties properties = new Properties();
 	    properties.put("group", "com.example");
 	    properties.put("artifact", "sab-plm-services");
-	    properties.put("version", "2.4");
+	    properties.put("version", "2.6");
 	    return new BuildProperties(properties);
 	}
 }
