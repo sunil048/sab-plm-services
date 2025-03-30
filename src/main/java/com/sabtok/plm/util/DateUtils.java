@@ -12,6 +12,7 @@ import java.time.LocalTime;
 import java.time.Month;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -47,12 +48,10 @@ public class DateUtils {
 	}
 	
 	public static void main(String args[]) {
-		DateUtils java8tester = new DateUtils();
-		Calendar cals = Calendar.getInstance();
-		//Displaying the actual date
-		System.out.println("The original Date: " + cals.getTime());
-	      java8tester.getDate();
-	      java8tester.getDateString();
+		String date = "11/3/2024";
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/M/yyyy");
+		LocalDate k = LocalDate.parse(date, formatter);
+		System.out.println(k);
 	   }
 	
 	public void testLocalDateTime() {
@@ -96,5 +95,7 @@ public class DateUtils {
 	      ZoneId currentZone = ZoneId.systemDefault();
 	      System.out.println("CurrentZone: " + currentZone);
 	   }
+
+
 	
 }

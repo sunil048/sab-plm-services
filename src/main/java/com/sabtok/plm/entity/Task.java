@@ -17,7 +17,7 @@ import javax.persistence.Transient;
 
 @Entity
 @Table(name="TASKS")
-public class Task {
+public class Task implements  Cloneable {
 
 	@Id
 	@Column(name="TASK_ID")
@@ -179,7 +179,15 @@ public class Task {
 				+ ", openDate=" + openDate + ", closedDate=" + closedDate + ", logList=" + logList + "]";
 	}
 
-	
 
-	
+    @Override
+    public Task clone() {
+        try {
+            Task clone = (Task) super.clone();
+            // TODO: copy mutable state here, so the clone can't change the internals of the original
+            return clone;
+        } catch (CloneNotSupportedException e) {
+            throw new AssertionError();
+        }
+    }
 }

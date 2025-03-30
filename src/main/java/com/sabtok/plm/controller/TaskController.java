@@ -8,6 +8,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.sabtok.plm.dao.BucketTaskDao;
+import com.sabtok.plm.entity.BucketTask;
+import lombok.RequiredArgsConstructor;
 import org.jboss.logging.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,12 +41,16 @@ import com.sabtok.plm.util.IDGenerator;
 //@CrossOrigin("*")
 @RestController
 @RequestMapping("/task")
+@RequiredArgsConstructor
 public class TaskController {
 	
 	private static org.slf4j.Logger logger = LoggerFactory.getLogger(TaskController.class);
 	
 	@Autowired
 	TaskService service;
+
+	@Autowired
+	private BucketTaskDao bucketTaskDao;
 
 	@GetMapping("/tasktype")
 	public List<String> getTaskType() {
@@ -126,6 +133,11 @@ public class TaskController {
 		if (status == null)
 			status = "Closed";
 		return service.getTaskListByStatus(status);
+	}
+
+	@GetMapping("/bucket-tasks")
+	public List<BucketTask> getBucketTasks(){
+		return bucketTaskDao.findAll();
 	}
 	
 	@GetMapping("/dashboard")

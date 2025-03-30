@@ -10,6 +10,7 @@ import java.util.Optional;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
+import com.sabtok.plm.entity.BucketTask;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
@@ -166,6 +167,11 @@ public class TaskServiceImpl implements TaskService {
 	@Override
 	public Integer getNoStatusTaskCount() {
 		return tdao.getNoStatusTaskCount();
+	}
+
+	@Override
+	public List<Task> getAllTaskExcludingClosed() {
+		return tdao.getAllTaskExcludingClosed();
 	}
 
 	@Override

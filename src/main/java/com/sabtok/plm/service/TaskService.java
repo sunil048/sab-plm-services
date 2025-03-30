@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
+import com.sabtok.plm.entity.BucketTask;
 import org.springframework.data.jpa.repository.Query;
 
 import com.sabtok.plm.entity.Task;
@@ -42,5 +43,6 @@ public interface TaskService {
 	public Integer getInprogressTaskCount();
 	public Integer getHoldTaskCount();
 	public Integer getNoStatusTaskCount();
+	public List<Task> getAllTaskExcludingClosed();
 	
 }
