@@ -1,5 +1,7 @@
 package com.sabtok.plm.entity;
 
+import org.hibernate.annotations.Where;
+
 import java.io.Serializable;
 import java.sql.Blob;
 import java.util.ArrayList;
@@ -28,6 +30,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="SABPROJECTS")
+@Where(clause = "STATUS_CD='A'")
 public class Project implements Serializable {
 	/**
 	 * 
@@ -70,17 +73,16 @@ public class Project implements Serializable {
     @Lob
     private String prodEnv;
 
-	/*@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
-	@JoinTable(name="PROJECT_SKILLS",joinColumns={@JoinColumn(name="PROJECT_ID")},inverseJoinColumns={@JoinColumn(name="SKILL_ITEM_ID")})
-	 private List<ProjectSkill> skillList = new ArrayList<ProjectSkill>();
-	
-	public List<ProjectSkill> getSkillList() {
-		return skillList;
+	@Column(name="STATUS_CD")
+	private String statusCode;
+
+	public String getStatusCode() {
+		return statusCode;
 	}
 
-	public void setSkillList(List<ProjectSkill> skillList) {
-		this.skillList = skillList;
-	}*/
+	public void setStatusCode(String statusCode) {
+		this.statusCode = statusCode;
+	}
 
 	public String getProjectId() {
 		return projectId;

@@ -64,4 +64,7 @@ public interface TaskDao extends JpaRepository<Task, String> {
 	
 	@Query("select count(*) from Task where status IS NULL OR status='' ")
 	public Integer getNoStatusTaskCount();
+
+	@Query(value="select * from Tasks where status !='Closed' OR status !='closed'",nativeQuery = true)
+	public List<Task> getAllTaskExcludingClosed();
 }
