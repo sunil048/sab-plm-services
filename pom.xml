@@ -12,7 +12,7 @@
 	<groupId>com.example</groupId>
 	<artifactId>sab-plm-services</artifactId>
 	<version>1</version>
-	<packaging>jar</packaging>
+	<packaging>war</packaging>
 	<name>sab-plm-services</name>
 	<description>Services for Project LifeCycle Management</description>
 
@@ -118,7 +118,7 @@
 
 	<build>
 	<!-- <finalName>${artifactId}</finalName> -->
-	<finalName>sab-plm-services-2.5</finalName>
+	<finalName>sab-plm-services-2.7</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
