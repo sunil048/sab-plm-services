@@ -32,7 +32,6 @@ public class RestCallExecutor {
     }
 
     public <T> T execute(Supplier<T> s) {
-
         try {
             return s.get();
         } catch (HystrixRuntimeException e) {
