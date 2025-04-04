@@ -65,7 +65,6 @@ import com.sabtok.plm.util.IDGenerator;
 import com.sabtok.plm.util.JsonUtil;
 import com.sabtok.plm.util.RestCalls;
 
-import javassist.bytecode.analysis.MultiArrayType;
 
 /**
  * @author Sunil
